@@ -1,0 +1,10 @@
+{
+  "heading": "Let's work\ntogether",
+  "tagline": "Open to structural design opportunities, BIM consulting, and international collaborations — particularly in Canadian and North American markets.",
+  "footer": "© 2026 Hamid Mahdavi · Senior Structural Designer · BIM & Digital Engineering Lead",
+  "buttons": [
+    { "label": "Send an email →", "href": "mailto:mahdavi91hamid@gmail.com",  "class": "btn-primary" },
+    { "label": "LinkedIn ↗",      "href": "https://www.linkedin.com/in/hamid-mahdavi/", "class": "btn-ghost", "target": "_blank" },
+    { "label": "View Full CV ↗",  "href": "https://www.canva.com/design/DAG7AV4P9Xw/LDsH1MYXZOn10Fhc72DjFA/view?utm_content=DAG7AV4P9Xw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3972e43772", "class": "btn-ghost", "target": "_blank" }
+  ]
+}

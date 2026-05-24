@@ -1,0 +1,44 @@
+[
+  {
+    "yearStart": "2025",
+    "yearEnd": "Present",
+    "title": "Digital Engineering Lead",
+    "company": "FIE Co.",
+    "description": "BIM workflows, AI/ML-ready data architecture, CDE setup & document digitalization."
+  },
+  {
+    "yearStart": "2023",
+    "yearEnd": "Present",
+    "title": "Senior Engineer — Value Engineering",
+    "company": "FIE Co.",
+    "description": "Technical & economic design evaluation. Eliminated 71 piles in silo project via ACI 313-16 §6.7.2."
+  },
+  {
+    "yearStart": "2021",
+    "yearEnd": "2023",
+    "title": "Project Manager",
+    "company": "FIE Co.",
+    "description": "EPC execution of sports complex & artificial lake. 20% cost-benefit improvement on steel structure."
+  },
+  {
+    "yearStart": "2018",
+    "yearEnd": "2021",
+    "title": "Structural Designer",
+    "company": "FIE Co.",
+    "description": "Industrial structures: warehouses, furnaces, pipe racks, pump stations, equipment foundations."
+  },
+  {
+    "yearStart": "2016",
+    "yearEnd": "2018",
+    "title": "Structural Designer",
+    "company": "Deesman Co.",
+    "description": "Precast concrete & GFRC facades for residential towers exceeding 40,000 m²."
+  },
+  {
+    "yearStart": "2014",
+    "yearEnd": "Present",
+    "title": "Freelance Structural Designer",
+    "company": "Independent",
+    "description": "20+ projects. Led team of 4 engineers and drafters across industrial and residential work."
+  }
+]
