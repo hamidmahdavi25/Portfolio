@@ -9,15 +9,15 @@
 
 /* ── DARK THEME (default) ── */
 :root {
-  --bg:        #0b0c0e;
+  --bg:        #131517;
   --bg2:       #131517;
   --bg3:       #1a1c1f;
   --bg4:       #222427;
   --text:      #e8e4dd;
   --text2:     #c4bfb8;
-  --muted:     #7f7d79;
-  --subtle:    #4f4e4b;
-  --gold:      #b89b6a;
+  --muted:     #a09d98;
+  --subtle:    #7a7875;
+  --gold:      #d4b88a;
   --gold2:     #d4b88a;
   --steel:     #7a9ab5;
   --steel-border: rgba(122,154,181,0.25);
