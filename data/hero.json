@@ -17,5 +17,10 @@
     { "label": "View Projects", "href": "#projects", "class": "btn-primary" },
     { "label": "LinkedIn ↗",    "href": "https://www.linkedin.com/in/hamid-mahdavi/", "class": "btn-ghost", "target": "_blank" },
     { "label": "View CV ↗",     "href": "https://www.canva.com/design/DAG7AV4P9Xw/LDsH1MYXZOn10Fhc72DjFA/view?utm_content=DAG7AV4P9Xw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3972e43772", "class": "btn-ghost", "target": "_blank" }
+  ],
+  "links": [
+    { "label": "mahdavi91hamid@gmail.com", "href": "mailto:mahdavi91hamid@gmail.com", "icon": "email" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/hamid-mahdavi/", "icon": "linkedin", "target": "_blank" },
+    { "label": "View CV", "href": "https://www.canva.com/design/...", "icon": "document", "target": "_blank" }
   ]
 }

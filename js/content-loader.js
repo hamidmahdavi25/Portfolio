@@ -51,6 +51,17 @@ async function loadHero() {
     if (btn.target) a.target = btn.target;
     ctaEl.appendChild(a);
   });
+  /* Links */
+  if (data.links) {
+    const linksEl = document.getElementById('heroLinks');
+    data.links.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.href;
+      if (link.target) a.target = link.target;
+      a.innerHTML = (ICONS[link.icon] || '') + link.label;
+      linksEl.appendChild(a);
+    });
+  }
 }
 
 /* ── ABOUT ── */

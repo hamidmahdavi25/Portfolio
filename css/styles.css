@@ -246,7 +246,7 @@ h2 {
   display: flex; align-items: center; gap: 0.8rem;
 }
 .hero-tag::before {
-  content: ''; display: block;
+  content: none; display: block;
   width: 28px; height: 1px; background: var(--gold);
 }
 h1 {
@@ -530,4 +530,7 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
   h1 { font-size: 2.1rem !important; }
   .hero-role { font-size: 1rem !important; }
   .hero-desc { font-size: 0.88rem; }
+}
+[data-theme="light"] .hero-bg-wrap {
+  display: none;
 }
