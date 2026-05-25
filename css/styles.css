@@ -9,7 +9,7 @@
 
 /* ── DARK THEME (default) ── */
 :root {
-  --bg:        #131517;
+  --bg:        #0b0c0e;
   --bg2:       #131517;
   --bg3:       #1a1c1f;
   --bg4:       #222427;
@@ -251,7 +251,7 @@ h2 {
 }
 h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem,5.5vw,5.5rem);
+  font-size: clamp(2.5rem,3vw,3.5rem);
   line-height: 1.12; font-weight: 700;
   color: var(--text); margin-bottom: 0.6rem;
 }
