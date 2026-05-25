@@ -17,8 +17,8 @@
   --text2:     #c4bfb8;
   --muted:     #a09d98;
   --subtle:    #7a7875;
-  --gold:      #d4b88a;
-  --gold2:     #d4b88a;
+  --gold:      #d4a55a;
+  --gold2:     #d4a55a;
   --steel:     #7a9ab5;
   --steel-border: rgba(122,154,181,0.25);
   --border:    rgba(255,255,255,0.07);
@@ -94,7 +94,7 @@ nav {
 .logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.35rem; font-weight: 600;
-  color: var(--gold); text-decoration: none;
+  color: var(--text2); text-decoration: none;
   white-space: nowrap; flex-shrink: 0;
 }
 .nav-center {
@@ -148,12 +148,14 @@ nav {
 .nav-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
 /* ── SHARED ── */
-section { padding: 6rem 5rem; }
+section { padding: 2.5rem 5rem; }
 section + section { border-top: 1px solid var(--border); }
 .label {
-  font-size: 0.7rem; letter-spacing: 0.25em;
+  font-size: .7rem; letter-spacing: 0.25em;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.6rem; display: block;
+  font-weight: 700;
+
 }
 h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -244,21 +246,24 @@ h2 {
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 1.2rem;
   display: flex; align-items: center; gap: 0.8rem;
+  font-weight: 700;
 }
 .hero-tag::before {
   content: none; display: block;
   width: 28px; height: 1px; background: var(--gold);
+  
 }
 h1 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem,3vw,3.5rem);
   line-height: 1.12; font-weight: 700;
-  color: var(--text); margin-bottom: 0.6rem;
+  color: var(--text); margin-bottom: -0.5rem;
 }
 .hero-role {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.1rem,2vw,1.6rem);
-  color: var(--gold2); font-weight: 400; margin-bottom: 1.6rem;
+  font-size: clamp(1.2rem,1.4vw,1.6rem);
+  color: var(--text); font-weight: 400; margin-bottom: 1.5rem;
+  font-weight: 700;
 }
 .hero-desc {
   font-size: 1rem; color: var(--muted);
