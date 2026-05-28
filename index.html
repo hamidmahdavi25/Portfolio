@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hamid Mahdavi — Senior Structural Designer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- All styles in one file — edit css/styles.css -->
+  <link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<body>
+
+  <div class="hero-bg-wrap" aria-hidden="true">
+    <img src="./assets/hero-bg.svg" alt="" role="presentation"/>
+  </div>
+
+<!-- ══════════════════════════════════════════════════
+     NAV
+     Text content (logo, links) is static — edit here.
+     Hamburger behaviour is in js/main.js
+     ══════════════════════════════════════════════════ -->
+<nav>
+  <a class="logo" href="#hero">HOME </a>
+
+  <!-- Desktop: nav links + theme toggle grouped right -->
+  <div class="nav-center">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">🌙</button>
+  </div>
+
+  <!-- Mobile: theme toggle + hamburger -->
+  <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle theme" title="Toggle light/dark" style="display:none">🌙</button>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════
+     HERO
+     Text injected by content-loader.js from data/hero.json
+     SVG graphic is kept inline (replace the <svg> block
+     in this file to swap the illustration).
+     ══════════════════════════════════════════════════ -->
+<section id="hero">
+  <!--
+    HERO BACKGROUND SVG
+    ═══════════════════
+    Source file: assets/hero-bg.svg
+    To swap with a different image or SVG:
+      1. Replace the src below with your file path
+         e.g. src="./assets/my-custom-bg.jpg"
+      2. Or delete the <img> and paste an inline <svg> here
+      3. To disable entirely: remove this <div> block
+    The SVG reads CSS variables from :root / [data-theme="light"]
+    so it responds to the dark/light toggle automatically.
+  -->
+
+
+  <div class="hero-left">
+    <p class="hero-tag" id="heroTag"></p>
+    <h1 id="heroName"></h1>
+    <p class="hero-role" id="heroRole"></p>
+    <p class="hero-desc"  id="heroDesc"></p>
+    <div class="hero-pills" id="heroPills"></div>
+    <div class="hero-cta"   id="heroCta"></div>
+    <div class="clinks" id="heroLinks"></div>
+  </div>
+
+ 
+    <div>
+    <p class="label" style="margin-bottom:1.5rem">Experience</p>
+    <!-- Timeline items appended here by content-loader.js -->
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     ABOUT
+     Content injected by content-loader.js (data/about.json, data/experience.json)
+     ══════════════════════════════════════════════════ -->
+<!-- <section id="about">
+  <span class="label">About me</span>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 id="aboutHeading"></h2> -->
+      <!-- Paragraphs appended here by content-loader.js -->
+      <!-- <div id="aboutParagraphs"></div>
+      <div class="clinks" id="aboutLinks"></div>
+    </div>
+  </div>
+</section> -->
+
+
+
+<!-- ══════════════════════════════════════════════════
+     PROJECTS
+     Cards rendered by js/projects.js from data/projects.json
+     To add a project: edit data/projects.json only.
+     Filter buttons are static (edit labels here if categories change).
+     ══════════════════════════════════════════════════ -->
+<section id="projects">
+  <span class="label">Portfolio</span>
+  <h2>Engineering Projects</h2>
+
+  <div class="filter-row">
+    <button class="fbtn active" data-filter="all">All</button>
+    <button class="fbtn" data-filter="Steel Structure">Steel</button>
+    <button class="fbtn" data-filter="Concrete Structure">Concrete</button>
+    <button class="fbtn" data-filter="Equipment Foundations">Foundations</button>
+    <button class="fbtn" data-filter="Infrastructure">Infrastructure</button>
+    <button class="fbtn" data-filter="Residential">Residential</button>
+  </div>
+
+  <!-- Cards injected here by projects.js -->
+  <div class="projects-grid" id="pgrid"></div>
+
+  <div class="show-more-wrap">
+    <button class="show-more-btn" id="smBtn">
+      <span id="smLabel">Show more projects</span>
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </button>
+  </div>
+</section>
+
+
+
+
+<!-- ══════════════════════════════════════════════════
+     SKILLS
+     Content injected by content-loader.js (data/skills.json)
+     ══════════════════════════════════════════════════ -->
+<section id="skills">
+  <span class="label">Technical expertise</span>
+  <h2>Skills &amp; Tools</h2>
+  <!-- Skill blocks appended here by content-loader.js -->
+  <div class="skills-blocks" id="skillsBlocks"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     EDUCATION
+     Content injected by content-loader.js (data/education.json)
+     ══════════════════════════════════════════════════ -->
+<section id="education">
+  <span class="label">Academic background</span>
+  <h2>Education</h2>
+  <!-- Cards appended here by content-loader.js -->
+  <div class="edu-grid" id="eduGrid"></div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════════
+     CONTACT
+     Content injected by content-loader.js (data/contact.json)
+     ══════════════════════════════════════════════════ -->
+<section id="contact">
+  <span class="label">Get in touch</span>
+  <div class="contact-inner">
+    <h2 id="contactHeading"></h2>
+    <p id="contactTagline"></p>
+    <div class="contact-cta" id="contactCta"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER — text injected by content-loader.js
+     ══════════════════════════════════════════════════ -->
+<footer>
+  <p id="footerText"></p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════
+     LIGHTBOX
+     Static shell — behaviour handled by js/lightbox.js
+     ══════════════════════════════════════════════════ -->
+<div class="lb" id="lb">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+    <div class="lb-stage" id="lbStage">
+      <img class="lb-img" id="lbImg" src="" alt="Project image"/>
+      <span class="lb-zoom-hint">Click to zoom · Drag to browse · Scroll to adjust</span>
+    </div>
+    <p class="lb-caption" id="lbCap"></p>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     SCRIPTS — load order matters:
+       1. lightbox.js  (sets up lb before projects need it)
+       2. projects.js  (renders cards, calls openLightbox)
+       3. content-loader.js  (fills text sections)
+       4. main.js      (nav toggle)
+
+     GITHUB PAGES DEPLOYMENT:
+       Push this entire folder to a repo named:
+         yourusername.github.io
+       Enable Pages in repo Settings → Pages → Source: main branch /root
+       Site will be live at https://yourusername.github.io
+     ══════════════════════════════════════════════════ -->
+<script src="./js/lightbox.js"></script>
+<script src="./js/projects.js"></script>
+<script src="./js/content-loader.js"></script>
+<script src="./js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "tag": "About Me",
+  "name": "Hamid Mahdavi",
+  "role": "Structural Designer | BIM & Digital Engineering Lead",
+  "description": [
+    "Senior Structural Designer with more than 10 years of experience across industrial, infrastructure, and residential projects — from steelmaking and pelletizing plants to sports halls and residential towers.",
+    "At Fooladtechnic International Engineering (FIE Co.), I currently lead BIM implementation and digital engineering workflows, designing AI/ML-ready data architectures for predictive quantity estimation and establishing Common Data Environments (CDEs).",
+    "Strong track record in value engineering: one case eliminated 71 concrete piles (25 m each) by applying ACI 313-16 §6.7.2. Also experienced in Canadian codes — NBC Part 4 & 9, CSA O86 — alongside ACI, AISC, and ASCE standards."
+  ],
+  "pills": [
+    "ACI · AISC · ASCE",
+    "NBC Part 4 & 9 · CSA O86",
+    "ETABS · SAP2000 · Revit",
+    "Python · Dynamo"
+  ],
+  "cta": [
+    { "label": "View Projects", "href": "#projects", "class": "btn-primary" },
+    { "label": "LinkedIn ↗",    "href": "https://www.linkedin.com/in/hamid-mahdavi/", "class": "btn-ghost", "target": "_blank" },
+    { "label": "View CV ↗",     "href": "https://www.canva.com/design/DAG7AV4P9Xw/LDsH1MYXZOn10Fhc72DjFA/view?utm_content=DAG7AV4P9Xw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3972e43772", "class": "btn-ghost", "target": "_blank" }
+  ],
+  "links": [
+    { "label": "mahdavi91hamid@gmail.com", "href": "mailto:mahdavi91hamid@gmail.com", "icon": "email" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/hamid-mahdavi/", "icon": "linkedin", "target": "_blank" },
+    { "label": "View CV", "href": "https://www.canva.com/design/...", "icon": "document", "target": "_blank" }
+  ]
+}
