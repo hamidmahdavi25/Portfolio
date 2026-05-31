@@ -17,8 +17,12 @@
  *   Place your files at that path inside the repo.
  */
 
-const ALBUM_ICON_SVG = `<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>`;
+const NAV_PREV_SVG = `<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>`;
+const NAV_NEXT_SVG = `<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>`;
+const ZOOM_IN_SVG  = `<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM10 10H8v-1h2V7h1v2h2v1h-2v2h-1v-2z"/></svg>`;
+const ZOOM_OUT_SVG = `<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/></svg>`;
 const COVER_DRAG_THRESHOLD = 40;
+const ZOOM_LEVELS = [1, 2, 3.5];  // click cycles through these
 
 let showAllState = false;
 let currentFilter = 'all';
@@ -36,31 +40,98 @@ function getCoverIndex(card) {
 function setCoverIndex(card, images, index) {
   const idx = ((index % images.length) + images.length) % images.length;
   card.dataset.coverIndex = String(idx);
+  // Reset zoom when switching images
+  resetCoverZoom(card);
   card.querySelector('.pcover > img').src = images[idx];
-  card.querySelectorAll('.pthumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+  card.querySelectorAll('.pdot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  const navEls = card.querySelectorAll('.pcover-nav');
+  navEls.forEach(n => n.style.display = images.length > 1 ? 'flex' : 'none');
 }
 
-/** Switch cover image when thumbnail is clicked */
-function switchCover(thumb) {
-  const card = thumb.closest('.pcard');
+/** Navigate card cover by delta */
+function navCover(card, delta) {
   const images = card.dataset.images.split(',');
-  const thumbs = [...card.querySelectorAll('.pthumb')];
-  setCoverIndex(card, images, thumbs.indexOf(thumb));
+  setCoverIndex(card, images, getCoverIndex(card) + delta);
 }
 
-/** Drag left/right on cover to browse album images; click opens lightbox */
-function initCoverInteraction(cover, images, card, title) {
-  if (images.length > 1) cover.classList.add('has-album');
+/** Apply zoom transform to cover image */
+function applyCoverZoom(cover, zoom, panX, panY) {
+  const img = cover.querySelector('img');
+  img.style.transform = zoom > 1
+    ? `scale(${zoom}) translate(${panX / zoom}px, ${panY / zoom}px)`
+    : '';
+  img.style.transition = zoom > 1 ? 'none' : 'transform .4s ease';
+  cover.classList.toggle('zoomed', zoom > 1);
+  cover.style.cursor = zoom > 1 ? 'grab' : (cover.classList.contains('has-album') ? 'grab' : 'zoom-in');
+}
 
-  let dragging = false;
-  let moved = false;
-  let startX = 0;
+/** Reset zoom on a card back to 1× */
+function resetCoverZoom(card) {
+  const cover = card.querySelector('.pcover');
+  card.dataset.zoom      = '0';  // index into ZOOM_LEVELS
+  card.dataset.panX      = '0';
+  card.dataset.panY      = '0';
+  applyCoverZoom(cover, 1, 0, 0);
+  const zoomBtn = card.querySelector('.pcover-zoom');
+  if (zoomBtn) { zoomBtn.innerHTML = ZOOM_IN_SVG; zoomBtn.setAttribute('aria-label', 'Zoom in'); }
+}
+
+/** Cycle zoom on click (no drag occurred) */
+function cycleCoverZoom(card) {
+  const cover    = card.querySelector('.pcover');
+  let zoomIdx    = parseInt(card.dataset.zoom || '0', 10);
+  zoomIdx        = (zoomIdx + 1) % ZOOM_LEVELS.length;
+  card.dataset.zoom = String(zoomIdx);
+  card.dataset.panX = '0';
+  card.dataset.panY = '0';
+  const zoom = ZOOM_LEVELS[zoomIdx];
+  applyCoverZoom(cover, zoom, 0, 0);
+  // Update zoom icon
+  const zoomBtn = card.querySelector('.pcover-zoom');
+  if (zoomBtn) {
+    const isZoomed = zoom > 1;
+    zoomBtn.innerHTML = isZoomed ? ZOOM_OUT_SVG : ZOOM_IN_SVG;
+    zoomBtn.setAttribute('aria-label', isZoomed ? 'Zoom out' : 'Zoom in');
+  }
+}
+
+/** Clamp pan so image doesn't drift too far off-screen */
+function clampPan(zoom, panX, panY, cover) {
+  const w = cover.offsetWidth;
+  const h = cover.offsetHeight;
+  const maxX = (w * (zoom - 1)) / 2;
+  const maxY = (h * (zoom - 1)) / 2;
+  return [
+    Math.max(-maxX, Math.min(maxX, panX)),
+    Math.max(-maxY, Math.min(maxY, panY)),
+  ];
+}
+
+/** Wire zoom, pan, and drag-to-switch onto the cover */
+function initCoverInteraction(cover, images, card) {
+  let dragging  = false;
+  let moved     = false;
+  let startX    = 0;
+  let startY    = 0;
+  let panStartX = 0;
+  let panStartY = 0;
+
+  // Touch: briefly show controls
+  cover.addEventListener('touchstart', () => {
+    cover.classList.add('touch-active');
+    clearTimeout(cover._touchTimer);
+    cover._touchTimer = setTimeout(() => cover.classList.remove('touch-active'), 2000);
+  }, { passive: true });
 
   cover.addEventListener('pointerdown', (e) => {
     if (e.button !== 0) return;
-    dragging = true;
-    moved = false;
-    startX = e.clientX;
+    if (e.target.closest('button')) return;  // let nav/zoom buttons handle their own clicks
+    dragging  = true;
+    moved     = false;
+    startX    = e.clientX;
+    startY    = e.clientY;
+    panStartX = parseFloat(card.dataset.panX || '0');
+    panStartY = parseFloat(card.dataset.panY || '0');
     cover.setPointerCapture(e.pointerId);
     cover.classList.add('dragging');
   });
@@ -68,8 +139,19 @@ function initCoverInteraction(cover, images, card, title) {
   cover.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     const dx = e.clientX - startX;
-    if (Math.abs(dx) > 5) moved = true;
-    if (images.length > 1) {
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+
+    const zoom = ZOOM_LEVELS[parseInt(card.dataset.zoom || '0', 10)];
+
+    if (zoom > 1) {
+      // Pan the zoomed image
+      const [cx, cy] = clampPan(zoom, panStartX + dx, panStartY + dy, cover);
+      card.dataset.panX = String(cx);
+      card.dataset.panY = String(cy);
+      applyCoverZoom(cover, zoom, cx, cy);
+    } else if (images.length > 1) {
+      // Drag to browse images
       cover.querySelector('img').style.transform = `translateX(${dx * 0.25}px)`;
     }
   });
@@ -79,14 +161,24 @@ function initCoverInteraction(cover, images, card, title) {
     dragging = false;
     cover.classList.remove('dragging');
     cover.releasePointerCapture(e.pointerId);
-    cover.querySelector('img').style.transform = '';
 
-    const dx = e.clientX - startX;
-    if (images.length > 1 && moved && Math.abs(dx) >= COVER_DRAG_THRESHOLD) {
+    const dx   = e.clientX - startX;
+    const zoom = ZOOM_LEVELS[parseInt(card.dataset.zoom || '0', 10)];
+
+    if (zoom <= 1 && images.length > 1 && moved && Math.abs(dx) >= COVER_DRAG_THRESHOLD) {
+      // Drag switched image
+      cover.querySelector('img').style.transform = '';
       setCoverIndex(card, images, getCoverIndex(card) + (dx < 0 ? 1 : -1));
       return;
     }
-    if (!moved) openLightbox(images, title, getCoverIndex(card));
+
+    if (zoom <= 1 && images.length > 1) {
+      cover.querySelector('img').style.transform = '';
+    }
+
+    if (!moved) {
+      // Plain click on image — no action (zoom is via zoom button only)
+    }
   };
 
   cover.addEventListener('pointerup', endDrag);
@@ -104,6 +196,9 @@ function renderCard(project) {
   card.dataset.images     = images.join(',');
   card.dataset.title      = project.title;
   card.dataset.coverIndex = '0';
+  card.dataset.zoom       = '0';
+  card.dataset.panX       = '0';
+  card.dataset.panY       = '0';
 
   /* Cover image */
   const coverImg = document.createElement('img');
@@ -118,27 +213,47 @@ function renderCard(project) {
 
   const overlay = document.createElement('div');
   overlay.className = 'pcover-overlay';
-  overlay.innerHTML = `<span class="album-hint">${ALBUM_ICON_SVG}View album</span>`;
+
+  /* Prev / Next arrows */
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'pcover-nav pcover-prev';
+  prevBtn.innerHTML = NAV_PREV_SVG;
+  prevBtn.setAttribute('aria-label', 'Previous image');
+  if (images.length <= 1) prevBtn.style.display = 'none';
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); navCover(card, -1); });
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'pcover-nav pcover-next';
+  nextBtn.innerHTML = NAV_NEXT_SVG;
+  nextBtn.setAttribute('aria-label', 'Next image');
+  if (images.length <= 1) nextBtn.style.display = 'none';
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); navCover(card, 1); });
+
+  /* Zoom button — cycles in-card zoom */
+  const zoomBtn = document.createElement('button');
+  zoomBtn.className = 'pcover-zoom';
+  zoomBtn.innerHTML = ZOOM_IN_SVG;
+  zoomBtn.setAttribute('aria-label', 'Zoom in');
+  zoomBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    cycleCoverZoom(card);
+  });
 
   const cover = document.createElement('div');
   cover.className = 'pcover';
-  cover.append(coverImg, overlay);
-  initCoverInteraction(cover, images, card, project.title);
+  if (images.length > 1) cover.classList.add('has-album');
+  cover.append(coverImg, overlay, prevBtn, nextBtn, zoomBtn);
+  initCoverInteraction(cover, images, card);
 
-  /* Thumbnail strip */
-  const strip = document.createElement('div');
-  strip.className = 'pthumb-strip';
-  images.forEach((src, i) => {
-    const th = document.createElement('img');
-    th.className = 'pthumb' + (i === 0 ? ' active' : '');
-    th.src = src;
-    th.alt = '';
-    th.onerror = () => {
-      th.onerror = null;
-      th.src = `https://placehold.co/96x72/1a1c1f/b89b6a?text=${i + 1}`;
-    };
-    th.addEventListener('click', () => switchCover(th));
-    strip.appendChild(th);
+  /* Dot indicators */
+  const dots = document.createElement('div');
+  dots.className = 'pdots';
+  images.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'pdot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Image ${i + 1}`);
+    dot.addEventListener('click', () => setCoverIndex(card, images, i));
+    dots.appendChild(dot);
   });
 
   /* Tags */
@@ -165,7 +280,7 @@ function renderCard(project) {
   `;
   body.appendChild(tagsEl);
 
-  card.append(cover, strip, body);
+  card.append(cover, dots, body);
   return card;
 }
 

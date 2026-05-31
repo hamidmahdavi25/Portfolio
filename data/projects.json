@@ -8,7 +8,7 @@
     "client": "FIE Co.",
     "description": "3D steel sports hall in SAP2000. Full AISC load evaluation: steel frames, rafters, bracing, beam-column connections, base plates, RC foundations. Led to PM appointment after 20% cost improvement.",
     "tags": ["SAP2000", "AISC", "Steel Frame", "Value Eng."],
-    "images": 4,
+    "images": 6,
     "featured": true
   },
   {
@@ -20,7 +20,7 @@
     "client": "Air Separation Plant | FIE Co.",
     "description": "Steel framing for ASP with 15-ton overhead crane. SAP2000 3D model, crane runway fatigue checks, lateral stability, and RC foundations under combined industrial loads.",
     "tags": ["Crane Runway", "Fatigue", "SAP2000"],
-    "images": 3,
+    "images": 4,
     "featured": true
   },
   {
