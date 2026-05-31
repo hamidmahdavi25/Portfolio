@@ -186,9 +186,9 @@ function initCoverInteraction(cover, images, card) {
 }
 
 /** Render a single project card DOM element */
-function renderCard(project) {
+function renderCard(project, index) {
   const images  = buildImagePaths(project.id, project.images);
-  const isExtra = !project.featured;
+  const isExtra = index >= 4;
 
   const card = document.createElement('div');
   card.className = 'pcard' + (isExtra ? ' extra' : '');
@@ -323,7 +323,7 @@ async function initProjects() {
   }
 
   const grid = document.getElementById('pgrid');
-  projects.forEach(p => grid.appendChild(renderCard(p)));
+  projects.forEach((p, i) => grid.appendChild(renderCard(p, i)));
 
   /* Filter buttons */
   document.querySelectorAll('.fbtn').forEach(btn => {
