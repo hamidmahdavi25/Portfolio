@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hamid Mahdavi — Senior Structural Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<body>
+
+<nav>
+  <div class="nav-progress" aria-hidden="true">
+    <div class="nav-progress-fill" id="navProgress"></div>
+  </div>
+  <a class="logo" href="." aria-label="Hamid Mahdavi — home">
+    <span class="logo-name">Hamid Mahdavi</span>
+    <span class="logo-role">Structural Engineer</span>
+  </a>
+  <div class="nav-center">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+  <button class="theme-toggle" id="themeToggleMobile" aria-label="Switch to light theme" style="display:none">
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="hero">
+  <div class="hero-intro">
+    <p class="hero-tag" id="heroTag"></p>
+    <h1 id="heroName"></h1>
+    <p class="hero-role" id="heroRole"></p>
+    <p class="hero-desc"  id="heroDesc"></p>
+    <div class="hero-pills" id="heroPills"></div>
+    <div class="clinks" id="heroLinks"></div>
+    <div class="hero-cta" id="heroCta"></div>
+  </div>
+  <div class="hero-exp">
+    <p class="label">Experience</p>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<section id="education">
+  <span class="label">Academic background</span>
+  <h2>Education</h2>
+  <div class="edu-grid" id="eduGrid"></div>
+</section>
+
+<section id="projects">
+  <span class="label">Portfolio</span>
+  <h2>Engineering Projects</h2>
+  <div class="filter-row">
+    <button class="fbtn active" data-filter="all">All</button>
+    <button class="fbtn" data-filter="Steel Structure">Steel</button>
+    <button class="fbtn" data-filter="Concrete Structure">Concrete</button>
+    <button class="fbtn" data-filter="Equipment Foundations">Foundations</button>
+    <button class="fbtn" data-filter="Infrastructure">Infrastructure</button>
+    <button class="fbtn" data-filter="Residential">Residential</button>
+  </div>
+  <div class="projects-grid" id="pgrid"></div>
+</section>
+
+<section id="more-projects">
+  <span class="label">Additional work</span>
+  <h2>More Projects</h2>
+  <div class="mproj-grid" id="mprojGrid"></div>
+</section>
+
+<section id="skills">
+  <span class="label">Technical expertise</span>
+  <h2>Skills &amp; Tools</h2>
+  <div class="skills-blocks" id="skillsBlocks"></div>
+</section>
+
+<section id="contact">
+  <span class="label">Get in touch</span>
+  <div class="contact-inner">
+    <h2 id="contactHeading"></h2>
+    <p id="contactTagline"></p>
+    <div class="contact-cta" id="contactCta"></div>
+  </div>
+</section>
+
+<footer>
+  <p id="footerText"></p>
+</footer>
+
+<div class="lb" id="lb">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+    <div class="lb-stage" id="lbStage">
+      <img class="lb-img" id="lbImg" src="" alt="Project image"/>
+      <span class="lb-zoom-hint">Click to zoom · Drag to browse · Scroll to adjust</span>
+    </div>
+    <p class="lb-caption" id="lbCap"></p>
+    <div class="lb-thumbs" id="lbThumbs"></div>
+  </div>
+</div>
+
+<script src="./js/lightbox.js"></script>
+<script src="./js/projects.js"></script>
+<script src="./js/content-loader.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+[
+  {
+    "category": "Structural Design",
+    "skills": [
+      { "name": "ACI 318",                 "highlight": true },
+      { "name": "AISC 360/341",            "highlight": true },
+      { "name": "ASCE 7",                  "highlight": true },
+      { "name": "NBC Part 4 & 9",          "highlight": true },
+      { "name": "CSA O86",                 "highlight": true },
+      { "name": "Seismic Design",          "highlight": false },
+      { "name": "Foundation Design",       "highlight": false },
+      { "name": "Value Engineering",       "highlight": false },
+      { "name": "Reinforcement Detailing", "highlight": false },
+      { "name": "Shop Drawings",           "highlight": false },
+      { "name": "BIM Coordination",        "highlight": false }
+    ]
+  },
+  {
+    "category": "Analysis & BIM Software",
+    "skills": [
+      { "name": "ETABS",           "highlight": true },
+      { "name": "SAP2000",         "highlight": true },
+      { "name": "SAFE",            "highlight": true },
+      { "name": "IDEA StatiCa",    "highlight": true },
+      { "name": "ForteWEB",        "highlight": false },
+      { "name": "Revit",           "highlight": true },
+      { "name": "Navisworks",      "highlight": false },
+      { "name": "Tekla Structures", "highlight": false },
+      { "name": "AVEVA UE",        "highlight": false }
+    ]
+  },
+  {
+    "category": "Programming & Automation",
+    "skills": [
+      { "name": "Python",              "highlight": true },
+      { "name": "Dynamo",              "highlight": true },
+      { "name": "MATLAB",              "highlight": false },
+      { "name": "Mathcad",             "highlight": false },
+      { "name": "AI/ML Datasets",      "highlight": false },
+      { "name": "CDE Setup",           "highlight": false },
+      { "name": "Workflow Automation",  "highlight": false }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "yearStart": "2025",
+    "yearEnd": "Present",
+    "title": "Digital Engineering Lead",
+    "company": "FIE Co.",
+    "description": "Implementing Building Information Modeling (BIM) workflows. Designing engineering data architecture for predictive quantity estimation (AI/ML-ready datasets) CDE setup, document digitalization, and workflow optimization."
+  },
+  {
+    "yearStart": "2023",
+    "yearEnd": "Present",  "partTime": true,
+    "title": "Senior Engineer (Value Engineering Group)",
+    "company": "FIE Co.",
+    "description": "Led the evaluation of structural and architectural designs prepared by engineering teams from both technical and economic standpoints. One case involved applying section 6.7.2 of ACI 313-16, allowing the neglect of overpressure effects from stored material in silo foundation design. This optimization eliminated the need for 71 concrete piles (each 25 meters long), significantly reducing construction costs."
+  },
+  {
+    "yearStart": "2021",
+    "yearEnd": "2023",
+    "title": "Project Manager",
+    "company": "FIE Co.",
+    "description": "Implemented value engineering for one of the company's projects, improving the cost-benefit ratio of the sports hall steel structure by 20%, which led to the CEO appointing me as Project Manager. Led EPC contract execution of a sports complex and artificial lake, overseeing structural, architectural, and mechanical design, detailing, and on-site supervision to ensure compliance and optimize efficiency."
+  },
+  {
+    "yearStart": "2018",
+    "yearEnd": "2021",
+    "title": "Structural Designer",
+    "company": "FIE Co.",
+    "description": "Design of various industrial structures, including industrial warehouses, workshops, furnaces, screening structures, pipe racks, equipment foundations, material handling systems, electrical rooms, pump stations, and more. "
+  },
+  {
+    "yearStart": "2016",
+    "yearEnd": "2018",
+    "title": "Structural Designer",
+    "company": "Deesman Co.",
+    "description": "Designed a variety of precast concrete structures, notably the 10,000 square meter Grand Market. Additionally, specialized in the design of precast Glass Fiber Reinforced Concrete facades for residential towers exceeding 40,000 square meters. "
+  },
+  {
+    "yearStart": "2014",
+    "yearEnd": "Present", "partTime": true,
+    "title": "Freelance Structural Designer",
+    "company": "Independent",
+    "description": "Provided structural design for 20+ industrial and residential projects, ensuring compliance with local and international specification codes. Led a team of 4 engineers and drafters, optimizing workflows to deliver projects on time."
+  }
+]
