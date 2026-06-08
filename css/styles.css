@@ -628,6 +628,7 @@ h1 {
 .pcard h3 { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
 .pplant { font-size: 0.76rem; color: var(--gold); margin-bottom: 0.6rem; }
 .pdesc { font-size: 0.82rem; color: var(--muted); flex: 1; line-height: 1.6; margin-bottom: 1.1rem; }
+.pdesc b { color: var(--text); font-weight: 400; font-size: 0.78rem; }
 .ptags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
 .ptag {
   font-size: 0.7rem; padding: 0.18rem 0.55rem;
