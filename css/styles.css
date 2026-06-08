@@ -316,7 +316,12 @@ h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem,4vw,3rem);
   font-weight: 600; color: var(--text);
-  margin-bottom: 2.5rem; line-height: 1.15;
+  margin-bottom: 1rem; line-height: 1.15;
+}
+.section-note {
+  font-size: 0.88rem; color: var(--muted);
+  line-height: 1.65; max-width: 760px;
+  font-weight: 300; margin-bottom: 2.5rem;
 }
 
 /* Buttons */
