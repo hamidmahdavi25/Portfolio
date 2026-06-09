@@ -1,14 +1,17 @@
 /**
  * projects.js
- * Renders project cards from ./data/projects.json
- * First 8 → main grid with images (#pgrid)
- * Remaining → compact text list (#mprojGrid)
+ * Renders project cards from two data files:
+ *   data/projects.json      → main grid with images (#pgrid)
+ *   data/more-projects.json → compact text list (#mprojGrid)
+ *
+ * Clicking any card cover opens the full-screen lightbox (lightbox.js).
  */
 
 const NAV_PREV_SVG = `<svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>`;
 const NAV_NEXT_SVG = `<svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>`;
 const ZOOM_IN_SVG  = `<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM10 10H8v-1h2V7h1v2h2v1h-2v2h-1v-2z"/></svg>`;
 const ZOOM_OUT_SVG = `<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"/></svg>`;
+
 const COVER_DRAG_THRESHOLD = 40;
 const ZOOM_LEVELS = [1, 2, 3.5];
 
@@ -59,7 +62,7 @@ function applyCoverZoom(cover, zoom, panX, panY) {
     : '';
   img.style.transition = zoom > 1 ? 'none' : 'transform .4s ease';
   cover.classList.toggle('zoomed', zoom > 1);
-  cover.style.cursor = zoom > 1 ? 'grab' : (cover.classList.contains('has-album') ? 'grab' : 'zoom-in');
+  cover.style.cursor = zoom > 1 ? 'grab' : 'pointer';
 }
 
 function resetCoverZoom(card) {
@@ -150,6 +153,7 @@ function initCoverInteraction(cover, images, card) {
     cover.releasePointerCapture(e.pointerId);
     const dx = e.clientX - startX;
     const zoom = ZOOM_LEVELS[parseInt(card.dataset.zoom || '0', 10)];
+
     if (zoom <= 1 && images.length > 1 && moved && Math.abs(dx) >= COVER_DRAG_THRESHOLD) {
       cover.querySelector('img').style.transform = '';
       setCoverIndex(card, images, getCoverIndex(card) + (dx < 0 ? 1 : -1));
@@ -157,6 +161,11 @@ function initCoverInteraction(cover, images, card) {
     }
     if (zoom <= 1 && images.length > 1) {
       cover.querySelector('img').style.transform = '';
+    }
+
+    // Clean click (no significant movement, not zoomed) → open lightbox
+    if (!moved && zoom <= 1) {
+      openLightbox(images, card.dataset.title, 0);
     }
   };
 
@@ -169,23 +178,22 @@ function renderCard(project) {
 
   const card = document.createElement('div');
   card.className = 'pcard';
-  card.dataset.tag        = project.category;
-  card.dataset.images     = images.join(',');
-  card.dataset.title      = project.title;
-  card.dataset.coverIndex = '0';
-  card.dataset.zoom       = '0';
-  card.dataset.panX       = '0';
-  card.dataset.panY       = '0';
+  card.dataset.tag         = project.category;
+  card.dataset.images      = images.join(',');
+  card.dataset.title       = project.title;
+  card.dataset.coverIndex  = '0';
+  card.dataset.zoom        = '0';
+  card.dataset.panX        = '0';
+  card.dataset.panY        = '0';
 
   const coverImg = document.createElement('img');
-  coverImg.src = images[0];
-  coverImg.alt = project.title;
+  coverImg.src      = images[0];
+  coverImg.alt      = project.title;
   coverImg.draggable = false;
-  coverImg.loading = 'lazy';
-  coverImg.onerror = () => {
+  coverImg.loading  = 'lazy';
+  coverImg.onerror  = () => {
     coverImg.onerror = null;
-    const label = project.title.replace(/\s+/g, '+');
-    coverImg.src = `https://placehold.co/800x500/1a1c1f/b89b6a?text=${label}`;
+    coverImg.src = `https://placehold.co/800x500/1a1c1f/b89b6a?text=${encodeURIComponent(project.title)}`;
   };
 
   const overlay = document.createElement('div');
@@ -214,6 +222,7 @@ function renderCard(project) {
   const cover = document.createElement('div');
   cover.className = 'pcover';
   if (images.length > 1) cover.classList.add('has-album');
+  cover.style.cursor = 'pointer';
   cover.append(coverImg, overlay, prevBtn, nextBtn, zoomBtn);
   initCoverInteraction(cover, images, card);
 
@@ -274,33 +283,34 @@ function renderCompactItem(project) {
 
 function applyFilter(filter) {
   currentFilter = filter;
-  document.querySelectorAll('.pcard').forEach(c => {
-    c.style.display = (filter === 'all' || c.dataset.tag === filter) ? 'flex' : 'none';
-  });
-  document.querySelectorAll('.mproj-item').forEach(c => {
+  document.querySelectorAll('.pcard, .mproj-item').forEach(c => {
     c.style.display = (filter === 'all' || c.dataset.tag === filter) ? 'flex' : 'none';
   });
 }
 
+async function fetchJSON(path) {
+  const res = await fetch(path);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
 async function initProjects() {
-  let projects = [];
-  try {
-    const res = await fetch('./data/projects.json');
-    projects = await res.json();
-  } catch (e) {
-    console.error('Could not load projects.json:', e);
-    return;
-  }
-
-  const mainProjects = projects.slice(0, 8);
-  const extraProjects = projects.slice(8);
-
-  const grid = document.getElementById('pgrid');
-  mainProjects.forEach(p => grid.appendChild(renderCard(p)));
-
+  const grid      = document.getElementById('pgrid');
   const mprojGrid = document.getElementById('mprojGrid');
-  if (mprojGrid && extraProjects.length > 0) {
-    extraProjects.forEach(p => mprojGrid.appendChild(renderCompactItem(p)));
+
+  try {
+    const [mainProjects, moreProjects] = await Promise.all([
+      fetchJSON('./data/projects.json'),
+      fetchJSON('./data/more-projects.json'),
+    ]);
+
+    mainProjects.forEach(p => grid.appendChild(renderCard(p)));
+
+    if (mprojGrid && moreProjects.length > 0) {
+      moreProjects.forEach(p => mprojGrid.appendChild(renderCompactItem(p)));
+    }
+  } catch (e) {
+    console.error('Could not load project data:', e);
   }
 
   document.querySelectorAll('.fbtn').forEach(btn => {
