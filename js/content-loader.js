@@ -48,7 +48,7 @@ async function loadHero() {
     a.className = `btn ${btn.class}`;
     a.href = btn.href;
     a.textContent = btn.label;
-    if (btn.target) a.target = btn.target;
+    if (btn.target) { a.target = btn.target; a.rel = 'noopener noreferrer'; }
     ctaEl.appendChild(a);
   });
   /* Links */
@@ -57,7 +57,7 @@ async function loadHero() {
     data.links.forEach(link => {
       const a = document.createElement('a');
       a.href = link.href;
-      if (link.target) a.target = link.target;
+      if (link.target) { a.target = link.target; a.rel = 'noopener noreferrer'; }
       a.innerHTML = (ICONS[link.icon] || '') + link.label;
       linksEl.appendChild(a);
     });
@@ -158,7 +158,7 @@ async function loadContact() {
     a.className = `btn ${btn.class}`;
     a.href = btn.href;
     a.textContent = btn.label;
-    if (btn.target) a.target = btn.target;
+    if (btn.target) { a.target = btn.target; a.rel = 'noopener noreferrer'; }
     ctaEl.appendChild(a);
   });
 }
