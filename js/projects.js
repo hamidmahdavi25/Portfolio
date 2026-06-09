@@ -14,6 +14,21 @@ const ZOOM_LEVELS = [1, 2, 3.5];
 
 let currentFilter = 'all';
 
+function buildDescHtml(p) {
+  if (!p.scope) return `<p class="pdesc">${p.description}</p>`;
+  const rows = [
+    ['Scope',        p.scope],
+    ['Key figures',  p.keyFigures],
+    ['Deliverables', p.deliverables],
+    ['My role',      p.myRole],
+    ['Challenge',    p.challenge],
+  ].filter(([, v]) => v);
+  const rowsHtml = rows.map(([label, val]) =>
+    `<div class="pdesc-row"><dt>${label}</dt><dd>${val}</dd></div>`
+  ).join('');
+  return `<p class="pdesc-intro">${p.description}</p><dl class="pdesc-list">${rowsHtml}</dl>`;
+}
+
 function buildImagePaths(id, count) {
   return Array.from({ length: count }, (_, i) => `./images/projects/${id}i${i + 1}.jpg`);
 }
@@ -230,7 +245,7 @@ function renderCard(project) {
     </div>
     <h3>${project.title}</h3>
     <p class="pplant">${project.client}</p>
-    <p class="pdesc">${project.description}</p>
+    ${buildDescHtml(project)}
   `;
   body.appendChild(tagsEl);
 

@@ -6,8 +6,13 @@
     "year": "2025",
     "location": "Hormozgan",
     "client": "Water Treatment Plant | FIE Co.",
-    "description": "Two RC liquid-retaining basins for a direct reduction plant's clean and process water circuits.<br><br><b>Scope</b> · Hydrostatic/hydrodynamic loading, thermal gradient analysis, FSI, pile foundation design.<br><b>Key figures</b> · Primary 75 × 21 × 4 m (6,300 m³); secondary 15 × 18 × 4 m (1,080 m³); combined 7,380 m³; ~7,100 m³ concrete; 875 t reinforcement.<br><b>Deliverables</b> · 50 A1 concrete drawings, 12 A1 steelwork/stairs; full calculation reports.<br><b>My role</b> · Structural designer — RC design, crack-width analysis, FSI, pile foundation design.<br><b>Challenge</b> · Crack width under combined thermal + hydrostatic loading → reinforcement revisions across wall and base slab zones.",
-    "tags": ["Liquid-Retaining", "Pile Foundation", "Thermal", "RC Design"],
+    "description": "Two RC cooling towers and their basins serving the direct and indirect water circuits of a water treatment plant (WTP) within a direct reduced iron (DRI) steel production facility.",
+    "scope": "RC design, thermal gradient analysis, hydrostatic/hydrodynamic loading, pile foundation design.",
+    "keyFigures": "Indirect tower: 75 m × 21 m × 4 m (height 16 m); direct tower: 15 m × 18 m × 4 m (height 12 m); concrete volume: ≈ 7,100 m³; reinforcement: 875 t.",
+    "deliverables": "Concrete drawings: 50 A1 sheets; steelwork/stairs drawings: 12 A1 sheets; full calculation reports.",
+    "myRole": "Structural designer and drafter.",
+    "challenge": "Crack width control under combined thermal and hydrostatic loading.",
+    "tags": ["RC Design", "Pile Foundation", "Thermal", "Liquid-Retaining"],
     "images": 4,
     "featured": false
   },
@@ -17,11 +22,16 @@
     "category": "Infrastructure",
     "year": "2021",
     "location": "Fars",
-    "client": "FIE Co.",
-    "description": "3D steel sports hall in SAP2000. Full AISC load evaluation: steel frames, rafters, bracing, beam-column connections, base plates, RC foundations. Led to PM appointment after 20% cost improvement.",
-    "tags": ["SAP2000", "AISC", "Steel Frame", "Value Eng."],
+    "client": "Cultural and Sports Complex | FIE Co.",
+    "description": "Multi-purpose recreational facility of 9,300 m² with a 3,000-seat capacity, designed to host competitions including futsal, volleyball, and basketball.",
+    "scope": "Design of steel frames and connections alongside internal RC structures comprising changing rooms and café, as well as reinforced concrete spectator platforms and foundations.",
+    "keyFigures": "Clear span: 50 m; footprint: 50 × 78 m; ridge height: 23 m; structural steel: ≈ 417 t; foundation concrete: 1,360 m³.",
+    "deliverables": "Concrete drawings: 53 A1 sheets; steel structure drawings: 22 A1 sheets; full calculation reports.",
+    "myRole": "Structural designer for the steel portion; design reviewer and approver for the concrete portion.",
+    "challenge": "Selecting an appropriate structural system posed a significant challenge given the unit-price contract nature of the project and strict architectural constraints. Through evaluation of alternatives, a MF system was adopted, achieving approximately 20% cost optimization — an outcome that directly led to my appointment as Project Manager for the full contract scope.",
+    "tags": ["Steel Frame", "Value Eng."],
     "images": 4,
-    "featured": true
+    "featured": false
   },
   {
     "id": "p3",
@@ -29,22 +39,32 @@
     "category": "Equipment Foundations",
     "year": "2022",
     "location": "Chaharmahal",
-    "client": "Billet Casting | FIE Co. / Danieli",
-    "description": "RC structures for billet casting facility. Ladle turret forces, high-temperature thermal gradients on thick walls and cooling chamber slabs, crack control under steelmaking demands.",
-    "tags": ["Thermal Gradient", "Crack Control", "Thick Walls"],
+    "client": "Billet Casting | Danieli/FIE Co.",
+    "description": "RC structures for a billet CCM (Continuous Casting Machine), designed to Danieli equipment requirements.",
+    "scope": "RC design for high-temperature thermal gradients on thick walls and cooling chamber slabs, with settlement limitations imposed by Danieli for slabs and foundations.",
+    "keyFigures": "Wall thickness: up to 800 mm; concrete volume: ≈ 2,700 m³; reinforcement: 310 t; design temperature: up to 140 °C.",
+    "deliverables": "Concrete drawings: 71 A1 sheets; full calculation reports.",
+    "myRole": "Structural designer.",
+    "challenge": "The structure's complex geometry was dictated by equipment and process requirements. The design had to withstand extreme thermal conditions and heavy mechanical loads, including a 7,300 kN static ladle turret load.",
+    "tags": ["RC Design", "Thermal Gradient", "Thick Walls"],
     "images": 4,
-    "featured": true
-  },  
+    "featured": false
+  },
   {
     "id": "p4",
-    "title": "Product Screen G6.010",
+    "title": "Screen Building",
     "category": "Steel Structure",
     "year": "2024",
     "location": "Fars",
-    "client": "2.5 MTPY Pelletizing Plant | FIE Co.",
-    "description": "Steel building in fired pellet handling area. Vendor load plans, heavy equipment frames, bracing, purlins, girts. RC foundations with bearing pressure and punching shear checks.",
+    "client": "Pelletizing Plant | NewFer GmbH/FIE Co.",
+    "description": "Steel structure for the Screen Building in the 2.5 MTPY (million tonnes per year) iron ore pelletizing plant.",
+    "scope": "Structural and foundation design of a screening building, accounting for dynamic equipment loads, with provision of support structures for screening machinery and inlet/outlet conveyor systems.",
+    "keyFigures": "Dimensions: 27 × 18 × 25 m; structural steel: 414 t; foundation concrete: 1,450 m³; reinforcement: 165 t.",
+    "deliverables": "Steelwork drawings: 60 A1 sheets; foundation drawings: 90 A1 sheets; full calculation reports.",
+    "myRole": "Structural designer and drafter.",
+    "challenge": "Accommodating heavy vendor equipment loads while satisfying bearing pressure and punching shear limits on the foundations.",
     "tags": ["Pelletizing", "Equipment Loads", "Steel Frame"],
-    "images": 3,
+    "images": 4,
     "featured": false
   },
   {
@@ -53,8 +73,13 @@
     "category": "Steel Structure",
     "year": "2025",
     "location": "Azarbaijan",
-    "client": "Mining Facility | TANINSA\u200bNAT",
-    "description": "Conveyor trusses, self-supporting bridges, galleries and walkways for SAG mill feed system. Vibration, fatigue-sensitive components, uplift control, and pile foundation design.",
+    "client": "Mining Facility | TANINSANAT",
+    "description": "Conveyor trusses, self-supporting bridges, galleries and walkways for a SAG mill feed system.",
+    "scope": "Vibration analysis, fatigue assessment of fatigue-sensitive components, uplift control, and pile foundation design.",
+    "keyFigures": "[XX] m total conveyor length; longest span: [XX] m; structural steel: ≈ [XX] t; piles: [XX].",
+    "deliverables": "Steelwork drawings: [XX] A1 sheets; foundation drawings: [XX] A1 sheets; full calculation and fatigue reports.",
+    "myRole": "Structural designer — truss and gallery design, vibration/fatigue checks, pile foundation design.",
+    "challenge": "Controlling vibration and fatigue in long-span conveyor trusses while managing uplift on the pile foundations.",
     "tags": ["Mining", "Conveyor Truss", "Vibration", "Fatigue"],
     "images": 2,
     "featured": false
@@ -66,7 +91,12 @@
     "year": "2023",
     "location": "Fars",
     "client": "FIE Co.",
-    "description": "Steel amphitheater with box-section columns and long-span roof in ETABS. End-plate and base-plate connections. Seismic, wind, and thermal load combinations.",
+    "description": "Steel amphitheater with box-section columns and a long-span roof, modeled in ETABS.",
+    "scope": "Long-span roof design, end-plate and base-plate connections, seismic, wind and thermal load combinations.",
+    "keyFigures": "Roof span: [XX] m; seating capacity: [XX]; structural steel: ≈ [XX] t; foundation concrete: [XX] m³.",
+    "deliverables": "Steelwork drawings: [XX] A1 sheets; foundation drawings: [XX] A1 sheets; full calculation reports.",
+    "myRole": "Structural designer — box-column and long-span roof design, connection design, foundations.",
+    "challenge": "Resolving long-span roof behaviour under combined seismic, wind and thermal load combinations.",
     "tags": ["Box Columns", "Long-Span", "ETABS"],
     "images": 3,
     "featured": false
@@ -78,7 +108,12 @@
     "year": "2024",
     "location": "Hormozgan",
     "client": "Direct Reduction Plant | FIE Co.",
-    "description": "Steel frames for pump station & air compressor hall. Crane runway, bracing, roof/wall purlins, fatigue checks, and dynamic equipment effects.",
+    "description": "Steel frames for a pump station and air compressor hall at a direct reduction plant.",
+    "scope": "Crane runway design, bracing, roof and wall purlins, fatigue checks, and dynamic equipment effects.",
+    "keyFigures": "Footprint: [XX] × [XX] m; crane capacity: [XX] t; structural steel: ≈ [XX] t; foundation concrete: [XX] m³.",
+    "deliverables": "Steelwork drawings: [XX] A1 sheets; foundation drawings: [XX] A1 sheets; full calculation reports.",
+    "myRole": "Structural designer — steel frame and crane runway design, foundations.",
+    "challenge": "Fatigue design of crane girders combined with dynamic effects from pump and compressor equipment.",
     "tags": ["Crane Girders", "Fatigue", "Dynamic Loads"],
     "images": 2,
     "featured": false
@@ -90,7 +125,12 @@
     "year": "2019",
     "location": "Isfahan",
     "client": "Dolomite & Magnesite Sintering | FIE Co.",
-    "description": "Massive RC foundations for rotary kiln and cooler. Thermal loads, dynamic effects, sliding/overturning stability, and long-term settlement control.",
+    "description": "Massive RC foundations for a rotary kiln and cooler at a dolomite and magnesite sintering plant.",
+    "scope": "Thermal loads, dynamic effects, sliding and overturning stability, and long-term settlement control.",
+    "keyFigures": "Kiln length: [XX] m; concrete: ≈ [XX] m³; reinforcement: [XX] t; thermal load: up to [XX] °C.",
+    "deliverables": "Concrete drawings: [XX] A1 sheets; full calculation, stability and settlement reports.",
+    "myRole": "Structural designer — RC foundation design, thermal/dynamic analysis, stability and settlement checks.",
+    "challenge": "Ensuring sliding/overturning stability and controlling long-term settlement under combined thermal and dynamic kiln loads.",
     "tags": ["Thermal Loads", "Dynamic Analysis", "Settlement"],
     "images": 3,
     "featured": false
@@ -119,7 +159,6 @@
     "images": 3,
     "featured": false
   },
-
   {
     "id": "p11",
     "title": "Access & Material Handling Platforms",
@@ -156,8 +195,6 @@
     "images": 3,
     "featured": false
   },
-
-
   {
     "id": "p14",
     "title": "Hostel",
@@ -170,7 +207,6 @@
     "images": 3,
     "featured": false
   },
-
   {
     "id": "p15",
     "title": "WTP & M.H Electrical Room",
@@ -183,15 +219,13 @@
     "images": 3,
     "featured": false
   },
-
-
   {
     "id": "p16",
     "title": "Transfer Tower TT07",
     "category": "Steel Structure",
     "year": "2022",
     "location": "Azarbaijan",
-    "client": "1.6 MTPY CDRI Plant | TANINSA\u200bNAT / FIE Co.",
+    "client": "1.6 MTPY CDRI Plant | TANINSANAT / FIE Co.",
     "description": "Material handling transfer tower for cold direct reduced iron plant. Steel frame, bracing, and foundation design under combined gravity and seismic loading.",
     "tags": ["Material Handling", "CDRI", "Steel Tower"],
     "images": 3,
@@ -203,7 +237,7 @@
     "category": "Steel Structure",
     "year": "2022",
     "location": "Isfahan",
-    "client": "22.5 MVA FeSi Plant | SAPRA\u200bSHIMI",
+    "client": "22.5 MVA FeSi Plant | SAPRASHIMI",
     "description": "Steel building for ferrosilicon casting and crushing. Structural design under heavy process equipment loads, seismic actions, and industrial operational demands.",
     "tags": ["FeSi Plant", "Steel Frame", "Heavy Equipment"],
     "images": 3,
