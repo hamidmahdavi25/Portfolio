@@ -57,6 +57,22 @@
   --lh-tight:   1.15;
   --lh-normal:  1.6;
   --lh-relaxed: 1.7;
+
+  /* ── LAYOUT ──
+     One horizontal inset + one max content width, shared by every
+     full-bleed block (nav, hero, sections, footer). --gutter keeps the
+     element edge-to-edge (so backgrounds/borders span the viewport) while
+     pushing its CONTENT to a single centered column: on screens wider than
+     --page-max the content caps at (--page-max - 2*--inset) and centers,
+     and every block lines up on the same left/right edge. */
+  --page-max: 1280px;
+  --inset:    clamp(1.4rem, 4vw, 4rem);
+  --gutter:   max(var(--inset), calc((100% - var(--page-max)) / 2 + var(--inset)));
+
+  /* Reading widths — a small, consistent measure system */
+  --measure-wide:   1000px;   /* wide layout column (hero intro) */
+  --measure:        760px;    /* body prose (hero desc, section notes) */
+  --measure-narrow: 560px;    /* narrow column (contact) */
 }
 
 /* ── LIGHT THEME (Warm Cream) ── */
@@ -108,7 +124,7 @@ nav {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; align-items: center;
   height: 64px;
-  padding: 0 3rem;
+  padding: 0 var(--gutter);
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
@@ -147,7 +163,7 @@ nav {
 nav::after {
   content: '';
   position: absolute;
-  bottom: -4px; left: 3rem; right: 3rem;
+  bottom: -4px; left: var(--gutter); right: var(--gutter);
   height: 1px;
   background: repeating-linear-gradient(
     90deg,
@@ -319,7 +335,7 @@ nav::after {
 .nav-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
 /* ── SHARED ── */
-section { padding: 2.5rem 5rem; scroll-margin-top: 62px; }
+section { padding: 2.5rem var(--gutter); scroll-margin-top: 62px; }
 section + section { border-top: 1px solid var(--border); }
 #experience { scroll-margin-top: 62px; }
 .label {
@@ -337,7 +353,7 @@ h2 {
 }
 .section-note {
   font-size: var(--fs-base); color: var(--muted);
-  line-height: var(--lh-normal); max-width: 760px;
+  line-height: var(--lh-normal); max-width: var(--measure);
   font-weight: 300; margin-bottom: 2.5rem;
 }
 
@@ -378,7 +394,7 @@ h2 {
 #hero {
   display: flex; flex-direction: column;
   gap: 3.25rem;
-  padding: 6.5rem 4rem 3.5rem;
+  padding: 6.5rem var(--gutter) 3.5rem;
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 140%);
 }
@@ -398,7 +414,7 @@ h2 {
 }
 .hero-intro {
   display: flex; flex-direction: column;
-  max-width: 1000px; flex: 1 1 auto; min-width: 0;
+  max-width: var(--measure-wide); flex: 1 1 auto; min-width: 0;
 }
 .hero-photo-wrap { flex: 0 0 auto; }
 .hero-figure { margin: 0; line-height: 0; }
@@ -451,7 +467,7 @@ h1 {
 }
 .hero-desc {
   font-size: var(--fs-lg); color: var(--muted);
-  max-width: 840px; margin-bottom: 1.5rem;
+  max-width: var(--measure); margin-bottom: 1.5rem;
   font-weight: 300; line-height: var(--lh-relaxed);
 }
 .hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.6rem; }
@@ -787,17 +803,16 @@ h1 {
 .edu-thesis { font-size: var(--fs-md); color: var(--muted); border-left: 2px solid var(--gold); padding-left: 0.8rem; line-height: var(--lh-normal); }
 
 /* ── CONTACT ── */
-.contact-inner { max-width: 560px; }
+.contact-inner { max-width: var(--measure-narrow); }
 .contact-inner p { color: var(--muted); margin-bottom: 2rem; font-weight: 300; }
 .contact-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 /* ── FOOTER ── */
-footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--subtle); }
+footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--subtle); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 0 1.2rem; height: 56px; }
-  nav::after { left: 1.2rem; right: 1.2rem; }
+  nav { height: 56px; }
   .logo { padding-right: 1rem; margin-right: 1rem; }
   .nav-right { display: none; }
   .nav-center { flex: 1; }
@@ -823,8 +838,8 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
   .nav-links a.nav-active { color: var(--gold); padding-left: 2rem; }
   .nav-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; margin-left: auto; }
   .theme-toggle { margin-left: 0.5rem; }
-  section { padding: 4rem 1.4rem; }
-  #hero { padding: 6.5rem 1.4rem 3rem; gap: 2.5rem; }
+  section { padding-block: 4rem; }
+  #hero { padding-block: 6.5rem 3rem; gap: 2.5rem; }
   /* Stack headshot above intro text on mobile */
   .hero-top { flex-direction: column-reverse; align-items: flex-start; gap: 1.9rem; }
   .hero-photo { width: clamp(150px, 44vw, 210px); }
@@ -839,7 +854,7 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
   .lb-prev { left: -0.5rem; } .lb-next { right: -0.5rem; }
 }
 @media (max-width: 480px) {
-  nav { padding: 0.7rem 1rem; }
+  nav { padding-block: 0.7rem; }
   h1 { font-size: 2.1rem !important; }
   .hero-role { font-size: var(--fs-lg) !important; }
   .hero-desc { font-size: var(--fs-base); }
