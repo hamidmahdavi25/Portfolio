@@ -44,17 +44,25 @@ function applyResponsiveSrc(img, jpgPath, kind) {
   }
 }
 
-let lbImgs  = [];
-let lbIdx   = 0;
-let lbTitle = '';
-let lbZoom  = 1;
-let lbPanX  = 0;
-let lbPanY  = 0;
+let lbImgs    = [];
+let lbIdx     = 0;
+let lbTitle   = '';
+let lbZoom    = 1;
+let lbPanX    = 0;
+let lbPanY    = 0;
+let lbTrigger = null;   // element to restore focus to on close
 
 const LB_MIN_ZOOM = 1;
 const LB_MAX_ZOOM = 4;
 const LB_CLICK_ZOOM = 2.5;
 const LB_DRAG_THRESHOLD = 40;
+
+/** Descriptive alt text for the main lightbox image */
+function lbAltText(i) {
+  return lbTitle
+    ? `${lbTitle} — image ${i + 1} of ${lbImgs.length}`
+    : `Project image ${i + 1} of ${lbImgs.length}`;
+}
 
 /** Sync album UI state on the lightbox stage */
 function syncLbStageState() {
@@ -82,6 +90,7 @@ function renderLightbox() {
 
   const img = document.getElementById('lbImg');
   applyResponsiveSrc(img, lbImgs[lbIdx], 'full');
+  img.alt = lbAltText(lbIdx);
 
   document.getElementById('lbCap').textContent =
     (lbTitle ? lbTitle + ' — ' : '') + `Image ${lbIdx + 1} of ${lbImgs.length}`;
@@ -93,7 +102,7 @@ function renderLightbox() {
   lbImgs.forEach((src, i) => {
     const t = document.createElement('img');
     t.className = 'lb-thumb' + (i === lbIdx ? ' active' : '');
-    t.alt = `Thumbnail ${i + 1}`;
+    t.alt = lbTitle ? `${lbTitle}, thumbnail ${i + 1}` : `Thumbnail ${i + 1}`;
     t.loading = 'lazy';
     applyResponsiveSrc(t, src, 'thumb');
     t.addEventListener('click', () => { lbIdx = i; updateLightbox(); });
@@ -107,6 +116,7 @@ function updateLightbox() {
 
   const img = document.getElementById('lbImg');
   applyResponsiveSrc(img, lbImgs[lbIdx], 'full');
+  img.alt = lbAltText(lbIdx);
   document.getElementById('lbCap').textContent =
     (lbTitle ? lbTitle + ' — ' : '') + `Image ${lbIdx + 1} of ${lbImgs.length}`;
   document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === lbIdx));
@@ -123,17 +133,43 @@ function closeLightbox() {
   resetLbZoom();
   document.getElementById('lb').classList.remove('open');
   document.body.style.overflow = '';
+  // Return focus to the element that opened the lightbox
+  if (lbTrigger && typeof lbTrigger.focus === 'function') lbTrigger.focus();
+  lbTrigger = null;
+}
+
+/** Visible, focusable controls inside the lightbox (for the focus trap) */
+function getLbFocusable() {
+  return Array.from(
+    document.querySelectorAll('.lb-inner button, .lb-inner [tabindex]:not([tabindex="-1"])')
+  ).filter(el => el.offsetParent !== null);
+}
+
+/** Keep Tab focus cycling within the open lightbox */
+function trapLbFocus(e) {
+  const f = getLbFocusable();
+  if (f.length === 0) return;
+  const first = f[0];
+  const last  = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault(); first.focus();
+  }
 }
 
 /** Called by projects.js */
 function openLightbox(images, title, startIndex = 0) {
   if (!images || images.length === 0) return;
+  lbTrigger = document.activeElement;   // remember opener for focus restore
   lbImgs  = images;
   lbTitle = title || '';
   lbIdx   = Math.max(0, Math.min(startIndex, images.length - 1));
   renderLightbox();
   document.getElementById('lb').classList.add('open');
   document.body.style.overflow = 'hidden';
+  // Move focus into the dialog
+  document.getElementById('lbClose').focus();
 }
 
 function setLbZoom(nextZoom) {
@@ -233,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Keyboard navigation */
   document.addEventListener('keydown', (e) => {
     if (!document.getElementById('lb').classList.contains('open')) return;
+    if (e.key === 'Tab')         trapLbFocus(e);
     if (e.key === 'Escape')      closeLightbox();
     if (e.key === 'ArrowLeft')   lbNav(-1);
     if (e.key === 'ArrowRight')  lbNav(1);

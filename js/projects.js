@@ -36,6 +36,11 @@ function buildImagePaths(id, count) {
   return Array.from({ length: count }, (_, i) => `./images/projects/${id}i${i + 1}.jpg`);
 }
 
+/** Descriptive alt text for a project cover image */
+function coverAlt(base, idx, n) {
+  return n > 1 ? `${base} — image ${idx + 1} of ${n}` : base;
+}
+
 function getCoverIndex(card) {
   return parseInt(card.dataset.coverIndex || '0', 10);
 }
@@ -44,7 +49,9 @@ function setCoverIndex(card, images, index) {
   const idx = ((index % images.length) + images.length) % images.length;
   card.dataset.coverIndex = String(idx);
   resetCoverZoom(card);
-  applyResponsiveSrc(card.querySelector('.pcover > img'), images[idx], 'cover');
+  const coverImgEl = card.querySelector('.pcover > img');
+  applyResponsiveSrc(coverImgEl, images[idx], 'cover');
+  coverImgEl.alt = coverAlt(card.dataset.alt || card.dataset.title, idx, images.length);
   card.querySelectorAll('.pdot').forEach((d, i) => d.classList.toggle('active', i === idx));
   const navEls = card.querySelectorAll('.pcover-nav');
   navEls.forEach(n => n.style.display = images.length > 1 ? 'flex' : 'none');
@@ -176,18 +183,21 @@ function initCoverInteraction(cover, images, card) {
 function renderCard(project) {
   const images = buildImagePaths(project.id, project.images);
 
+  const altBase = `${project.title}, ${project.category} in ${project.location} (${project.year})`;
+
   const card = document.createElement('div');
   card.className = 'pcard';
   card.dataset.tag         = project.category;
   card.dataset.images      = images.join(',');
   card.dataset.title       = project.title;
+  card.dataset.alt         = altBase;
   card.dataset.coverIndex  = '0';
   card.dataset.zoom        = '0';
   card.dataset.panX        = '0';
   card.dataset.panY        = '0';
 
   const coverImg = document.createElement('img');
-  coverImg.alt       = project.title;
+  coverImg.alt       = coverAlt(altBase, 0, images.length);
   coverImg.draggable = false;
   coverImg.loading   = 'lazy';
   coverImg.decoding  = 'async';
