@@ -6,7 +6,7 @@
   "role": "Senior Structural Designer · BIM & Digital Engineering Lead",
   "description": "Structural designer across steel, concrete and timber — with deep specialization in heavy industrial structures. 10+ years designing to ACI, AISC and ASCE, with working knowledge of Canadian codes (CSA, NBC). Hands-on in ETABS, SAP2000 and Tekla Structures, with BIM delivery in Revit.",
   "cta": [
-    { "label": "Download Résumé ↗", "href": "./assets/Resume.pdf", "class": "btn-primary", "target": "_blank" },
+    { "label": "Download Resume ↗", "href": "./assets/Resume.pdf", "class": "btn-primary", "target": "_blank" },
     { "label": "View Projects", "href": "#projects", "class": "btn-ghost" }
   ],
   "links": [
