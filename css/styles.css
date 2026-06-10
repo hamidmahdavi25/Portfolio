@@ -53,6 +53,14 @@
   --fs-2xl:  1.3125rem;   /* 21px */
   --fs-3xl:  1.5rem;      /* 24px */
 
+  /* ── BODY-TEXT VOLUME ──
+     Every descriptive paragraph reads at one size so sections don't drift.
+     --fs-body is the default; --fs-lead is one step up for the hero intro
+     only. Small muted body copy uses weight 400 (300 hurts legibility on the
+     dark theme); 300 is reserved for the larger lead. */
+  --fs-body: var(--fs-base);   /* 14px — all section descriptions */
+  --fs-lead: var(--fs-lg);     /* 16px — hero intro only */
+
   /* Line-heights */
   --lh-tight:   1.15;
   --lh-normal:  1.6;
@@ -364,9 +372,9 @@ h2 {
   margin-bottom: 1rem; line-height: var(--lh-tight);
 }
 .section-note {
-  font-size: var(--fs-base); color: var(--muted);
+  font-size: var(--fs-body); color: var(--muted);
   line-height: var(--lh-normal); max-width: var(--measure);
-  font-weight: 300; margin-bottom: 2.5rem;
+  font-weight: 400; margin-bottom: 2.5rem;
 }
 
 /* Buttons */
@@ -494,7 +502,7 @@ h1 {
   font-weight: 700;
 }
 .hero-desc {
-  font-size: var(--fs-lg); color: var(--muted);
+  font-size: var(--fs-lead); color: var(--muted);
   max-width: var(--measure); margin-bottom: 1.5rem;
   font-weight: 300; line-height: var(--lh-relaxed);
 }
@@ -509,7 +517,7 @@ h1 {
 }
 /* ── ABOUT ── */
 .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; }
-.about-text p { color: var(--muted); margin-bottom: 1rem; font-weight: 300; font-size: var(--fs-lg); }
+.about-text p { color: var(--muted); margin-bottom: 1rem; font-weight: 400; font-size: var(--fs-body); }
 .clinks { display: flex; gap: 1.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .clinks a {
   display: flex; align-items: center; gap: 0.5rem;
@@ -558,7 +566,7 @@ h1 {
   font-weight: 600; flex-shrink: 0;
 }
 .tco { font-size: var(--fs-sm); color: var(--gold); margin-bottom: 0.3rem; }
-.tdesc { font-size: var(--fs-sm); color: var(--muted); line-height: var(--lh-normal); }
+.tdesc { font-size: var(--fs-body); color: var(--muted); line-height: var(--lh-normal); }
 
 /* ── SKILLS ── */
 .skills-blocks { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
@@ -714,11 +722,11 @@ h1 {
 .pyear { font-size: var(--fs-sm); color: var(--subtle); flex-shrink: 0; }
 .pcard h3 { font-size: var(--fs-lg); font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
 .pplant { font-size: var(--fs-sm); color: var(--gold); margin-bottom: 0.6rem; }
-.pdesc { font-size: var(--fs-md); color: var(--muted); flex: 1; line-height: var(--lh-normal); margin-bottom: 1.1rem; }
+.pdesc { font-size: var(--fs-body); color: var(--muted); flex: 1; line-height: var(--lh-normal); margin-bottom: 1.1rem; }
 .pdesc b { color: var(--text); font-weight: 400; font-size: var(--fs-sm); }
 .pdesc-intro {
-  font-size: var(--fs-md); color: var(--muted); line-height: var(--lh-normal);
-  margin-bottom: 0.5rem; font-weight: 300;
+  font-size: var(--fs-body); color: var(--muted); line-height: var(--lh-normal);
+  margin-bottom: 0.5rem; font-weight: 400;
 }
 .pdesc-list {
   flex: 1; margin: 0 0 1.1rem;
@@ -736,7 +744,7 @@ h1 {
   line-height: var(--lh-normal);
 }
 .pdesc-row dd {
-  margin: 0; text-align: left; font-weight: 300;
+  margin: 0; text-align: left; font-weight: 400;
 }
 .ptags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
 .ptag {
@@ -828,12 +836,12 @@ h1 {
 .edu-card:hover { border-color: var(--card-hover-border); transform: translateY(-3px); box-shadow: 0 12px 30px var(--card-shadow); }
 .edu-deg { font-family: 'Cormorant Garamond', serif; font-size: var(--fs-2xl); font-weight: 600; color: var(--gold); margin-bottom: 0.2rem; }
 .edu-school { font-size: var(--fs-base); font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
-.edu-meta { font-size: var(--fs-md); color: var(--muted); margin-bottom: 0.8rem; }
-.edu-thesis { font-size: var(--fs-md); color: var(--muted); border-left: 2px solid var(--gold); padding-left: 0.8rem; line-height: var(--lh-normal); }
+.edu-meta { font-size: var(--fs-body); color: var(--muted); margin-bottom: 0.8rem; }
+.edu-thesis { font-size: var(--fs-body); color: var(--muted); border-left: 2px solid var(--gold); padding-left: 0.8rem; line-height: var(--lh-normal); }
 
 /* ── CONTACT ── */
 .contact-inner { max-width: var(--measure-narrow); }
-.contact-inner p { color: var(--muted); margin-bottom: 2rem; font-weight: 300; }
+.contact-inner p { color: var(--muted); margin-bottom: 2rem; font-weight: 400; font-size: var(--fs-body); }
 .contact-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 /* ── FOOTER ── */
@@ -881,7 +889,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .titem:last-child::after { display: none; }
   h1 { font-size: 2.6rem !important; line-height: var(--lh-tight); }
   .hero-role { font-size: var(--fs-xl) !important; }
-  .hero-desc { font-size: var(--fs-base); max-width: 100%; }
+  .hero-desc { font-size: var(--fs-body); max-width: 100%; }
   .about-grid, .skills-blocks, .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
   .projects-grid { grid-template-columns: 1fr; gap: 1.6rem; }
   .lb-prev { left: -0.5rem; } .lb-next { right: -0.5rem; }
@@ -889,7 +897,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
 @media (max-width: 480px) {
   h1 { font-size: 2.1rem !important; }
   .hero-role { font-size: var(--fs-lg) !important; }
-  .hero-desc { font-size: var(--fs-base); }
+  .hero-desc { font-size: var(--fs-body); }
 }
 /* ── MORE PROJECTS (compact list) ── */
 .mproj-grid {
