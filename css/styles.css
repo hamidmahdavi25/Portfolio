@@ -344,12 +344,11 @@ nav::after {
 section { padding: var(--spacing-section-v) var(--gutter); scroll-margin-top: 62px; }
 section + section { border-top: 1px solid var(--border); }
 #experience { scroll-margin-top: 62px; }
+/* Unified eyebrow label style for all section headings */
 .label {
-  font-size: var(--fs-xs); letter-spacing: 0.25em;
+  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.6rem; display: block;
-  font-weight: 700;
-
 }
 h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -463,12 +462,12 @@ h2 {
   filter: var(--svg-filter);
   transition: opacity 0.3s, filter 0.3s;
 } */
+/* Hero tag: same as .label but with flex layout for decorative line */
 .hero-tag {
-  font-size: var(--fs-sm); letter-spacing: 0.22em;
+  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.5rem;
   display: flex; align-items: center; gap: 0.8rem;
-  font-weight: 700;
 }
 .hero-tag::before {
   content: none; display: block;
@@ -562,8 +561,9 @@ h1 {
   transition: border-color .25s, transform .25s, box-shadow .25s;
 }
 .skill-block:hover { border-color: var(--card-hover-border); transform: translateY(-3px); box-shadow: 0 12px 30px var(--card-shadow); }
+/* Skill block title: same as .label but with flex layout for divider line */
 .skill-block-title {
-  font-size: var(--fs-xs); letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700; text-transform: uppercase;
   color: var(--gold); margin-bottom: 1.1rem;
   display: flex; align-items: center; gap: 0.6rem;
 }
