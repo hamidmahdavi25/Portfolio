@@ -21,13 +21,37 @@ function imgSources(jpgPath) {
   };
 }
 
+/* Local inline-SVG placeholder (no external service) using the active theme's
+   colors, shown only if both the WebP and JPEG sources fail to load. */
+function placeholderSVG(label) {
+  const light = document.documentElement.getAttribute('data-theme') === 'light';
+  const bg  = light ? '#e9e2d5' : '#161820';
+  const fg  = light ? '#7a5e2e' : '#d4a55a';
+  const sub = light ? '#6f6658' : '#888580';
+  const text = (label || 'Project image').replace(/[<>&]/g, ' ').slice(0, 44);
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">` +
+    `<rect width="800" height="500" fill="${bg}"/>` +
+    `<rect x="1" y="1" width="798" height="498" fill="none" stroke="${fg}" stroke-opacity="0.4"/>` +
+    `<text x="400" y="248" font-family="Georgia,serif" font-size="30" fill="${fg}" text-anchor="middle">${text}</text>` +
+    `<text x="400" y="286" font-family="sans-serif" font-size="15" fill="${sub}" text-anchor="middle" letter-spacing="1">Image unavailable</text>` +
+    `</svg>`;
+  return 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+
 /* kind: 'full' (lightbox main) | 'cover' (card) | 'thumb' */
-function applyResponsiveSrc(img, jpgPath, kind) {
+function applyResponsiveSrc(img, jpgPath, kind, label) {
   const s = imgSources(jpgPath);
-  img.onerror = () => {                 // WebP unsupported or missing → JPEG
-    img.onerror = null;
+  let stage = 0;
+  img.onerror = () => {
+    stage += 1;
     img.removeAttribute('srcset');
-    img.src = s.jpg;
+    if (stage === 1) {                  // WebP unsupported/missing → original JPEG
+      img.src = s.jpg;
+    } else {                            // JPEG missing too → local SVG placeholder
+      img.onerror = null;
+      img.src = placeholderSVG(label);
+    }
   };
   if (kind === 'thumb') {
     img.removeAttribute('srcset');
@@ -89,7 +113,7 @@ function renderLightbox() {
   resetLbZoom();
 
   const img = document.getElementById('lbImg');
-  applyResponsiveSrc(img, lbImgs[lbIdx], 'full');
+  applyResponsiveSrc(img, lbImgs[lbIdx], 'full', lbTitle);
   img.alt = lbAltText(lbIdx);
 
   document.getElementById('lbCap').textContent =
@@ -104,7 +128,7 @@ function renderLightbox() {
     t.className = 'lb-thumb' + (i === lbIdx ? ' active' : '');
     t.alt = lbTitle ? `${lbTitle}, thumbnail ${i + 1}` : `Thumbnail ${i + 1}`;
     t.loading = 'lazy';
-    applyResponsiveSrc(t, src, 'thumb');
+    applyResponsiveSrc(t, src, 'thumb', lbTitle);
     t.addEventListener('click', () => { lbIdx = i; updateLightbox(); });
     tb.appendChild(t);
   });
@@ -115,7 +139,7 @@ function updateLightbox() {
   resetLbZoom();
 
   const img = document.getElementById('lbImg');
-  applyResponsiveSrc(img, lbImgs[lbIdx], 'full');
+  applyResponsiveSrc(img, lbImgs[lbIdx], 'full', lbTitle);
   img.alt = lbAltText(lbIdx);
   document.getElementById('lbCap').textContent =
     (lbTitle ? lbTitle + ' — ' : '') + `Image ${lbIdx + 1} of ${lbImgs.length}`;

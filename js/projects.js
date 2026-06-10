@@ -50,7 +50,7 @@ function setCoverIndex(card, images, index) {
   card.dataset.coverIndex = String(idx);
   resetCoverZoom(card);
   const coverImgEl = card.querySelector('.pcover > img');
-  applyResponsiveSrc(coverImgEl, images[idx], 'cover');
+  applyResponsiveSrc(coverImgEl, images[idx], 'cover', card.dataset.title);
   coverImgEl.alt = coverAlt(card.dataset.alt || card.dataset.title, idx, images.length);
   card.querySelectorAll('.pdot').forEach((d, i) => d.classList.toggle('active', i === idx));
   const navEls = card.querySelectorAll('.pcover-nav');
@@ -203,7 +203,7 @@ function renderCard(project) {
   coverImg.decoding  = 'async';
   coverImg.width     = 800;          /* container aspect-ratio handles layout; */
   coverImg.height    = 500;          /* attrs are a CLS hint (16:10)            */
-  applyResponsiveSrc(coverImg, images[0], 'cover');
+  applyResponsiveSrc(coverImg, images[0], 'cover', project.title);
 
   const overlay = document.createElement('div');
   overlay.className = 'pcover-overlay';
