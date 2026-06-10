@@ -41,8 +41,7 @@
 
   /* ── TYPE SCALE ──
      Modular font-size scale (base 16px). Every element maps to the
-     nearest step so visually-identical sizes share one token.
-     h1/h2 keep their own clamp() for fluid display sizing. */
+     nearest step so visually-identical sizes share one token. */
   --fs-2xs:  0.625rem;    /* 10px */
   --fs-xs:   0.6875rem;   /* 11px */
   --fs-sm:   0.75rem;     /* 12px */
@@ -52,6 +51,11 @@
   --fs-xl:   1.125rem;    /* 18px */
   --fs-2xl:  1.3125rem;   /* 21px */
   --fs-3xl:  1.5rem;      /* 24px */
+
+  /* Display heading — one fluid size shared by the hero name (h1) and every
+     section title (h2: Experience, Education, Projects, Skills, contact).
+     This is the base h2 clamp scaled down 10%. */
+  --fs-heading: clamp(1.8rem, 3.6vw, 2.7rem);
 
   /* ── BODY-TEXT VOLUME ──
      Every descriptive paragraph reads at one size so sections don't drift.
@@ -254,10 +258,11 @@ nav::after {
   padding: 0 1rem;
   color: var(--muted);
   text-decoration: none;
-  font-size: var(--fs-md);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 500;
+  /* Match the section titles: Cormorant serif, sentence-case, title weight. */
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--fs-lg);
+  letter-spacing: 0.01em;
+  font-weight: 600;
   transition: color .2s;
   white-space: nowrap;
   position: relative;
@@ -370,7 +375,7 @@ section + section { border-top: 1px solid var(--border); }
 }
 h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem,4vw,3rem);
+  font-size: var(--fs-heading);
   font-weight: 600; color: var(--text);
   margin-bottom: 1rem; line-height: var(--lh-tight);
 }
@@ -478,9 +483,8 @@ h2 {
 }
 h1 {
   font-family: 'Cormorant Garamond', serif;
-  /* Floor low enough for phones (~2.1rem) so no mobile override is needed;
-     scales fluidly up to 3.5rem on wide screens. */
-  font-size: clamp(2.1rem, calc(1.6rem + 1.4vw), 3.5rem);
+  /* Same display size as the section titles (h2). */
+  font-size: var(--fs-heading);
   line-height: var(--lh-tight); font-weight: 700;
   color: var(--text); margin-bottom: -0.5rem;
 }
@@ -840,7 +844,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .nav-links li a {
     display: block; width: 100%; padding: 0.85rem 1.6rem;
     height: auto;
-    font-size: var(--fs-sm); letter-spacing: 0.1em;
+    font-size: var(--fs-lg); letter-spacing: 0.01em;
     border-bottom: 1px solid var(--border); color: var(--muted);
   }
   .nav-links li:last-child a { border-bottom: none; }
