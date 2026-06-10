@@ -7,11 +7,7 @@
   "description": "Structural designer across steel, concrete and timber — with deep specialization in heavy industrial structures. 10+ years designing to ACI, AISC and ASCE, with working knowledge of Canadian codes (CSA, NBC). Hands-on in ETABS, SAP2000 and Tekla Structures, with BIM delivery in Revit.",
   "cta": [
     { "label": "Download Resume ↗", "href": "./assets/Resume.pdf", "class": "btn-primary", "target": "_blank" },
-    { "label": "View Projects", "href": "#projects", "class": "btn-ghost" }
+    { "label": "Digital Transformation Deck ↗", "href": "https://canva.link/6h86kip9w6p5ev0", "class": "btn-ghost", "target": "_blank" }
   ],
-  "links": [
-    { "label": "mahdavi91hamid@gmail.com", "href": "mailto:mahdavi91hamid@gmail.com", "icon": "email" },
-    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/hamid-mahdavi/", "icon": "linkedin", "target": "_blank" },
-    { "label": "Digital Transformation Deck (Canva) ↗", "href": "https://canva.link/6h86kip9w6p5ev0", "icon": "document", "target": "_blank" }
-  ]
+  "links": []
 }

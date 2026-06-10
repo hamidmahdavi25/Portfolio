@@ -440,7 +440,7 @@ h1 {
 }
 .hero-desc {
   font-size: 1.02rem; color: var(--muted);
-  max-width: 840px; margin-bottom: 0.8rem;
+  max-width: 840px; margin-bottom: 0.72rem;
   font-weight: 300; line-height: 1.7;
 }
 .hero-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.6rem; }

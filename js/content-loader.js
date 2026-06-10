@@ -190,6 +190,17 @@ async function loadContact() {
   document.getElementById('contactTagline').textContent = data.tagline;
   document.getElementById('footerText').textContent = data.footer;
 
+  if (data.links) {
+    const linksEl = document.getElementById('contactLinks');
+    data.links.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.href;
+      if (link.target) { a.target = link.target; a.rel = 'noopener noreferrer'; }
+      a.innerHTML = (ICONS[link.icon] || '') + link.label;
+      linksEl.appendChild(a);
+    });
+  }
+
   const ctaEl = document.getElementById('contactCta');
   data.buttons.forEach(btn => {
     const a = document.createElement('a');

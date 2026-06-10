@@ -75,6 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const navAnchors = navLinks.querySelectorAll('a');
 
   function updateActiveLink() {
+    if (window.scrollY < 20) {
+      navAnchors.forEach(a => {
+        a.classList.toggle('nav-active', a.getAttribute('href') === '#hero');
+      });
+      return;
+    }
+
     const scrollMid = window.scrollY + window.innerHeight * 0.4;
     let active = '';
 
