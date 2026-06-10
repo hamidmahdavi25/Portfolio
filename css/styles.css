@@ -73,6 +73,10 @@
   --measure-wide:   1000px;   /* wide layout column (hero intro) */
   --measure:        760px;    /* body prose (hero desc, section notes) */
   --measure-narrow: 560px;    /* narrow column (contact) */
+
+  /* Vertical rhythm — consistent spacing that scales down (not up) on mobile */
+  --spacing-section-v: 2.5rem;   /* vertical padding per section (desktop) */
+  --spacing-hero-gap:  2.5rem;   /* gap between hero and first section */
 }
 
 /* ── LIGHT THEME (Warm Cream) ── */
@@ -337,7 +341,7 @@ nav::after {
 .nav-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
 /* ── SHARED ── */
-section { padding: 2.5rem var(--gutter); scroll-margin-top: 62px; }
+section { padding: var(--spacing-section-v) var(--gutter); scroll-margin-top: 62px; }
 section + section { border-top: 1px solid var(--border); }
 #experience { scroll-margin-top: 62px; }
 .label {
@@ -412,7 +416,7 @@ h2 {
 #hero {
   display: flex; flex-direction: column;
   gap: 2.5rem;
-  padding: 5.25rem var(--gutter) 2.5rem;
+  padding: 5.25rem var(--gutter) var(--spacing-section-v);
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 140%);
 }
@@ -856,8 +860,10 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .nav-links a.nav-active { color: var(--gold); padding-left: 2rem; }
   .nav-toggle { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; margin-left: auto; }
   .theme-toggle { margin-left: 0.5rem; }
-  section { padding-block: 4rem; }
-  #hero { padding-block: 5.5rem 2.5rem; gap: 2.25rem; }
+  /* Mobile: reduce vertical spacing (not increase) */
+  :root { --spacing-section-v: 2rem; }
+  section { padding-block: var(--spacing-section-v); }
+  #hero { padding-block: 4rem 2rem; gap: 2rem; }
   /* Stack headshot above intro text on mobile */
   .hero-top { flex-direction: column-reverse; align-items: flex-start; gap: 1.9rem; }
   .hero-photo { width: clamp(150px, 44vw, 210px); }
