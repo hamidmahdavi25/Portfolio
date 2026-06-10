@@ -17,6 +17,7 @@ const ICONS = {
   email:    `<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
   linkedin: `<svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.73V1.73C24 .77 23.21 0 22.23 0z"/></svg>`,
   document: `<svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>`,
+  external: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
 };
 
 /* ── HERO ── */
@@ -47,8 +48,20 @@ async function loadHero() {
     const a = document.createElement('a');
     a.className = `btn ${btn.class}`;
     a.href = btn.href;
-    a.textContent = btn.label;
     if (btn.target) { a.target = btn.target; a.rel = 'noopener noreferrer'; }
+
+    // Remove trailing arrow from label if present
+    const label = btn.label.replace(/\s*↗\s*$/, '');
+    a.textContent = label;
+
+    // Add external link icon for new-tab links
+    if (btn.target === '_blank') {
+      const icon = document.createElement('span');
+      icon.className = 'external-icon';
+      icon.innerHTML = ICONS.external;
+      a.appendChild(icon);
+    }
+
     ctaEl.appendChild(a);
   });
   /* Links */
@@ -206,8 +219,20 @@ async function loadContact() {
     const a = document.createElement('a');
     a.className = `btn ${btn.class}`;
     a.href = btn.href;
-    a.textContent = btn.label;
     if (btn.target) { a.target = btn.target; a.rel = 'noopener noreferrer'; }
+
+    // Remove trailing arrow from label if present
+    const label = btn.label.replace(/\s*↗\s*$/, '');
+    a.textContent = label;
+
+    // Add external link icon for new-tab links
+    if (btn.target === '_blank') {
+      const icon = document.createElement('span');
+      icon.className = 'external-icon';
+      icon.innerHTML = ICONS.external;
+      a.appendChild(icon);
+    }
+
     ctaEl.appendChild(a);
   });
 }

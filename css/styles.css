@@ -283,7 +283,7 @@ nav::after {
 /* Theme toggle button */
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px;
+  width: 40px; height: 40px;
   background: none;
   border: 1px solid var(--border2);
   border-radius: 5px;
@@ -322,8 +322,10 @@ nav::after {
   background: none;
   border: 1px solid var(--border2);
   border-radius: 4px;
-  padding: 0.38rem 0.52rem;
+  width: 40px; height: 40px;
+  padding: 0;
   cursor: pointer; flex-shrink: 0;
+  align-items: center; justify-content: center;
 }
 .nav-toggle span {
   display: block; width: 18px; height: 1.5px;
@@ -388,6 +390,22 @@ h2 {
 .btn-ghost:hover {
   border-color: var(--gold);
   color: var(--gold);
+}
+
+/* External link icon — plain inline SVG, no box styling */
+.external-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.35rem;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+.external-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
 }
 
 /* ── HERO ── */
@@ -836,7 +854,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .nav-links a.nav-active::after,
   .nav-links a.nav-active::before { display: none; }
   .nav-links a.nav-active { color: var(--gold); padding-left: 2rem; }
-  .nav-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; margin-left: auto; }
+  .nav-toggle { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; margin-left: auto; }
   .theme-toggle { margin-left: 0.5rem; }
   section { padding-block: 4rem; }
   #hero { padding-block: 5.5rem 2.5rem; gap: 2.25rem; }
