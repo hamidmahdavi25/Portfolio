@@ -62,6 +62,44 @@ async function loadHero() {
       linksEl.appendChild(a);
     });
   }
+
+  /* Headshot photo — optional. Renders a <picture> when data.photoWebp is set,
+     otherwise a single <img>. If the image fails to load (e.g. file not yet
+     added), the whole block is removed so the hero gracefully falls back to a
+     single-column, text-only layout. */
+  if (data.photo) {
+    const wrap = document.getElementById('heroPhotoWrap');
+    if (wrap) {
+      const fig = document.createElement('figure');
+      fig.className = 'hero-figure';
+
+      const img = document.createElement('img');
+      img.className = 'hero-photo';
+      img.alt = data.photoAlt || data.name || '';
+      img.width = 300;          /* explicit dimensions reserve space (no CLS) */
+      img.height = 400;
+      img.decoding = 'async';
+      img.loading = 'eager';    /* above the fold */
+      img.onerror = () => wrap.remove();
+
+      if (data.photoWebp) {
+        const picture = document.createElement('picture');
+        const source = document.createElement('source');
+        source.type = 'image/webp';
+        source.srcset = data.photoWebp;
+        picture.appendChild(source);
+        img.src = data.photo;   /* fallback format (e.g. jpg) */
+        picture.appendChild(img);
+        fig.appendChild(picture);
+      } else {
+        img.src = data.photo;
+        fig.appendChild(img);
+      }
+
+      wrap.appendChild(fig);
+      document.getElementById('hero').classList.add('has-photo');
+    }
+  }
 }
 
 /* ── EXPERIENCE TIMELINE ── */
