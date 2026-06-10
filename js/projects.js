@@ -44,7 +44,7 @@ function setCoverIndex(card, images, index) {
   const idx = ((index % images.length) + images.length) % images.length;
   card.dataset.coverIndex = String(idx);
   resetCoverZoom(card);
-  card.querySelector('.pcover > img').src = images[idx];
+  applyResponsiveSrc(card.querySelector('.pcover > img'), images[idx], 'cover');
   card.querySelectorAll('.pdot').forEach((d, i) => d.classList.toggle('active', i === idx));
   const navEls = card.querySelectorAll('.pcover-nav');
   navEls.forEach(n => n.style.display = images.length > 1 ? 'flex' : 'none');
@@ -187,14 +187,13 @@ function renderCard(project) {
   card.dataset.panY        = '0';
 
   const coverImg = document.createElement('img');
-  coverImg.src      = images[0];
-  coverImg.alt      = project.title;
+  coverImg.alt       = project.title;
   coverImg.draggable = false;
-  coverImg.loading  = 'lazy';
-  coverImg.onerror  = () => {
-    coverImg.onerror = null;
-    coverImg.src = `https://placehold.co/800x500/1a1c1f/b89b6a?text=${encodeURIComponent(project.title)}`;
-  };
+  coverImg.loading   = 'lazy';
+  coverImg.decoding  = 'async';
+  coverImg.width     = 800;          /* container aspect-ratio handles layout; */
+  coverImg.height    = 500;          /* attrs are a CLS hint (16:10)            */
+  applyResponsiveSrc(coverImg, images[0], 'cover');
 
   const overlay = document.createElement('div');
   overlay.className = 'pcover-overlay';

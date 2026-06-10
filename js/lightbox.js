@@ -6,6 +6,44 @@
  *   openLightbox(images, title, startIndex)
  */
 
+/* ── Responsive image helper (shared with projects.js) ──
+   Source images live as ./images/projects/pXiY.jpg. For each we also ship:
+     pXiY.webp     (≤1600px)  → lightbox
+     pXiY-sm.webp  (≤800px)   → card covers + thumbnails
+   We serve WebP via srcset/sizes and fall back to the original JPEG through
+   onerror for browsers that can't decode WebP. (A static <picture> is avoided
+   because both the cover and lightbox swap img.src dynamically.) */
+function imgSources(jpgPath) {
+  return {
+    jpg:    jpgPath,
+    webp:   jpgPath.replace(/\.jpg$/i, '.webp'),
+    smWebp: jpgPath.replace(/\.jpg$/i, '-sm.webp'),
+  };
+}
+
+/* kind: 'full' (lightbox main) | 'cover' (card) | 'thumb' */
+function applyResponsiveSrc(img, jpgPath, kind) {
+  const s = imgSources(jpgPath);
+  img.onerror = () => {                 // WebP unsupported or missing → JPEG
+    img.onerror = null;
+    img.removeAttribute('srcset');
+    img.src = s.jpg;
+  };
+  if (kind === 'thumb') {
+    img.removeAttribute('srcset');
+    img.removeAttribute('sizes');
+    img.src = s.smWebp;
+  } else if (kind === 'cover') {
+    img.sizes  = '(max-width: 900px) 92vw, 46vw';
+    img.srcset = `${s.smWebp} 800w, ${s.webp} 1600w`;
+    img.src    = s.smWebp;
+  } else {                              // 'full'
+    img.sizes  = '100vw';
+    img.srcset = `${s.smWebp} 800w, ${s.webp} 1600w`;
+    img.src    = s.webp;
+  }
+}
+
 let lbImgs  = [];
 let lbIdx   = 0;
 let lbTitle = '';
@@ -43,11 +81,7 @@ function renderLightbox() {
   resetLbZoom();
 
   const img = document.getElementById('lbImg');
-  img.src = lbImgs[lbIdx];
-  img.onerror = () => {
-    img.onerror = null;
-    img.src = `https://placehold.co/800x500/1a1c1f/b89b6a?text=Image+${lbIdx + 1}`;
-  };
+  applyResponsiveSrc(img, lbImgs[lbIdx], 'full');
 
   document.getElementById('lbCap').textContent =
     (lbTitle ? lbTitle + ' — ' : '') + `Image ${lbIdx + 1} of ${lbImgs.length}`;
@@ -59,9 +93,9 @@ function renderLightbox() {
   lbImgs.forEach((src, i) => {
     const t = document.createElement('img');
     t.className = 'lb-thumb' + (i === lbIdx ? ' active' : '');
-    t.src = src;
     t.alt = `Thumbnail ${i + 1}`;
-    t.onerror = () => { t.onerror = null; t.src = `https://placehold.co/96x72/1a1c1f/b89b6a?text=${i + 1}`; };
+    t.loading = 'lazy';
+    applyResponsiveSrc(t, src, 'thumb');
     t.addEventListener('click', () => { lbIdx = i; updateLightbox(); });
     tb.appendChild(t);
   });
@@ -72,11 +106,7 @@ function updateLightbox() {
   resetLbZoom();
 
   const img = document.getElementById('lbImg');
-  img.src = lbImgs[lbIdx];
-  img.onerror = () => {
-    img.onerror = null;
-    img.src = `https://placehold.co/800x500/1a1c1f/b89b6a?text=Image+${lbIdx + 1}`;
-  };
+  applyResponsiveSrc(img, lbImgs[lbIdx], 'full');
   document.getElementById('lbCap').textContent =
     (lbTitle ? lbTitle + ' — ' : '') + `Image ${lbIdx + 1} of ${lbImgs.length}`;
   document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === lbIdx));
