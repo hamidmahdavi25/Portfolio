@@ -96,4 +96,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateProgress();
   updateActiveLink();
+
+  /* ── SCROLL REVEAL ──
+     Fade/slide each section's blocks in as they enter the viewport.
+     Skipped (content shown immediately) when the user prefers reduced
+     motion or IntersectionObserver is unavailable. */
+  (function initScrollReveal() {
+    const blocks = document.querySelectorAll('main > section > *');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduce || !('IntersectionObserver' in window)) return;  // leave content visible
+
+    blocks.forEach(el => el.classList.add('reveal'));
+
+    // Gentle stagger within each section
+    document.querySelectorAll('main > section').forEach(sec => {
+      let i = 0;
+      Array.from(sec.children).forEach(child => {
+        if (child.classList.contains('reveal')) {
+          child.style.transitionDelay = Math.min(i * 70, 280) + 'ms';
+          i += 1;
+        }
+      });
+    });
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    blocks.forEach(el => io.observe(el));
+  })();
 });

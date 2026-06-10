@@ -32,7 +32,9 @@
   --svg-opacity: 0.9;
   --svg-filter: drop-shadow(0 0 40px rgba(184,155,106,0.12));
   --hero-glow: rgba(184,155,106,0.06);
+  --hero-glow2: rgba(122,154,181,0.05);
   --card-hover-border: rgba(184,155,106,0.45);
+  --card-shadow: rgba(0,0,0,0.30);
   --filter-active-bg: rgba(184,155,106,0.06);
   --tpresent-text: #0b0c0e;
   --r: 10px;
@@ -63,7 +65,9 @@
   --svg-opacity: 0.45;
   --svg-filter: sepia(0.6) brightness(0.55) contrast(1.1);
   --hero-glow: rgba(122,94,46,0.05);
+  --hero-glow2: rgba(61,94,122,0.045);
   --card-hover-border: rgba(122,94,46,0.5);
+  --card-shadow: rgba(60,40,12,0.12);
   --filter-active-bg: rgba(122,94,46,0.08);
   --tpresent-text: #f2ece0;
   --r: 10px;
@@ -363,10 +367,14 @@ h2 {
   gap: 3.25rem;
   padding: 6.5rem 4rem 3.5rem;
   position: relative; overflow: hidden;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 140%);
 }
+/* Layered soft glows give the hero depth: gold (top-right) + steel (bottom-left) */
 #hero::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 70% 0%, var(--hero-glow) 0%, transparent 55%);
+  background:
+    radial-gradient(ellipse 70% 62% at 78% -8%, var(--hero-glow) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 55% at 0% 112%, var(--hero-glow2) 0%, transparent 58%);
   pointer-events: none;
 }
 /* Top row: intro text (left) + headshot (right) on desktop */
@@ -498,7 +506,9 @@ h1 {
 .skill-block {
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: var(--r); padding: 1.8rem;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
 }
+.skill-block:hover { border-color: var(--card-hover-border); transform: translateY(-3px); box-shadow: 0 12px 30px var(--card-shadow); }
 .skill-block-title {
   font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 1.1rem;
@@ -533,9 +543,9 @@ h1 {
 .pcard {
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: var(--r); display: flex; flex-direction: column;
-  transition: border-color .25s, transform .25s; overflow: hidden;
+  transition: border-color .25s, transform .25s, box-shadow .25s; overflow: hidden;
 }
-.pcard:hover { border-color: var(--card-hover-border); transform: translateY(-3px); }
+.pcard:hover { border-color: var(--card-hover-border); transform: translateY(-3px); box-shadow: 0 12px 30px var(--card-shadow); }
 .pcard.extra { display: none; }
 
 .pcover {
@@ -753,7 +763,9 @@ h1 {
 .edu-card {
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: var(--r); padding: 2rem;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
 }
+.edu-card:hover { border-color: var(--card-hover-border); transform: translateY(-3px); box-shadow: 0 12px 30px var(--card-shadow); }
 .edu-deg { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--gold); margin-bottom: 0.2rem; }
 .edu-school { font-size: 0.9rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
 .edu-meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; }
@@ -831,13 +843,15 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
 }
 .mproj-item {
   background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
   padding: 1.1rem 1.3rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  transition: background .2s;
+  transition: background .2s, border-color .25s, transform .25s, box-shadow .25s;
 }
-.mproj-item:hover { background: var(--bg3); }
+.mproj-item:hover { background: var(--bg3); border-color: var(--card-hover-border); transform: translateY(-2px); box-shadow: 0 10px 24px var(--card-shadow); }
 .mproj-item-top {
   display: flex;
   align-items: flex-start;
@@ -934,4 +948,17 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
     scroll-behavior: auto !important;
   }
   .pcard:hover .pcover:not(.zoomed) > img { transform: none !important; }
+  /* Never hide content from users who prefer reduced motion */
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* ── SCROLL REVEAL ──
+   The .reveal class is added by JS only when motion is allowed, so the page
+   stays fully visible without JS or with reduced-motion preferences. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
