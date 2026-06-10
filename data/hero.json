@@ -1,6 +1,8 @@
 {
   "tag": "About Me",
   "name": "Hamid Mahdavi",
+  "photo": "./images/hamid-mahdavi.webp",
+  "photoAlt": "Portrait of Hamid Mahdavi, Structural Designer",
   "role": "Structural Designer | BIM & Digital Engineering Lead",
   "description": "Structural Engineer · 10+ Years · Industrial & Residential. Specialized in heavy industrial structures, including steel and mineral processing plants, with deep fluency in ACI, AISC, and ASCE standards. Proficient in SAP2000, ETABS, SAFE, IDEA StatiCa, and BIM workflows via Revit and Navisworks. Currently leading digital transformation through BIM deployment, CDE setup, and AI/ML-driven estimation models.",
   "cta": [
