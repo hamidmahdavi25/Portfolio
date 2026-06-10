@@ -69,6 +69,11 @@
   --inset:    clamp(1.4rem, 4vw, 4rem);
   --gutter:   max(var(--inset), calc((100% - var(--page-max)) / 2 + var(--inset)));
 
+  /* Fixed-nav height — single source of truth. Anchor scroll-margin, the
+     dashed rule, and the mobile dropdown offset all derive from this so they
+     stay aligned with the actual bar at every breakpoint (see media queries). */
+  --nav-h: 64px;
+
   /* Reading widths — a small, consistent measure system */
   --measure-wide:   1000px;   /* wide layout column (hero intro) */
   --measure:        760px;    /* body prose (hero desc, section notes) */
@@ -127,7 +132,7 @@ body {
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; align-items: center;
-  height: 64px;
+  height: var(--nav-h);
   padding: 0 var(--gutter);
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
@@ -167,7 +172,9 @@ nav {
 nav::after {
   content: '';
   position: absolute;
-  bottom: -4px; left: var(--gutter); right: var(--gutter);
+  /* Sit just below the bar — derived from --nav-h so it tracks the actual
+     height at every breakpoint instead of drifting from a hardcoded offset. */
+  top: calc(var(--nav-h) + 3px); left: var(--gutter); right: var(--gutter);
   height: 1px;
   background: repeating-linear-gradient(
     90deg,
@@ -215,7 +222,7 @@ nav::after {
   display: flex;
   list-style: none;
   gap: 0;
-  height: 64px;
+  height: var(--nav-h);
   align-items: center;
 }
 .nav-links li { height: 100%; }
@@ -341,9 +348,9 @@ nav::after {
 .nav-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
 /* ── SHARED ── */
-section { padding: var(--spacing-section-v) var(--gutter); scroll-margin-top: 62px; }
+section { padding: var(--spacing-section-v) var(--gutter); scroll-margin-top: var(--nav-h); }
 section + section { border-top: 1px solid var(--border); }
-#experience { scroll-margin-top: 62px; }
+#experience { scroll-margin-top: var(--nav-h); }
 /* Unified eyebrow label style for all section headings */
 .label {
   font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700;
@@ -834,13 +841,15 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { height: 56px; }
+  /* Shorter bar on mobile — update the single source of truth so the anchor
+     scroll-margin, dashed rule, and dropdown offset all follow automatically. */
+  :root { --nav-h: 56px; }
   .logo { padding-right: 1rem; margin-right: 1rem; }
   .nav-right { display: none; }
   .nav-center { flex: 1; }
   .nav-links {
     display: none; flex-direction: column; gap: 0; height: auto;
-    position: absolute; top: 100%; left: 0; right: 0;
+    position: absolute; top: var(--nav-h); left: 0; right: 0;
     background: var(--nav-mobile-bg);
     border-bottom: 1px solid var(--border);
     padding: 0.4rem 0; z-index: 300;
@@ -878,7 +887,6 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .lb-prev { left: -0.5rem; } .lb-next { right: -0.5rem; }
 }
 @media (max-width: 480px) {
-  nav { padding-block: 0.7rem; }
   h1 { font-size: 2.1rem !important; }
   .hero-role { font-size: var(--fs-lg) !important; }
   .hero-desc { font-size: var(--fs-base); }
