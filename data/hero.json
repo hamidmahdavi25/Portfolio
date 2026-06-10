@@ -3,11 +3,11 @@
   "name": "Hamid Mahdavi",
   "photo": "./images/hamid-mahdavi.webp",
   "photoAlt": "Portrait of Hamid Mahdavi, Structural Designer",
-  "role": "Structural Designer | BIM & Digital Engineering Lead",
-  "description": "Structural Engineer · 10+ Years · Industrial & Residential. Specialized in heavy industrial structures, including steel and mineral processing plants, with deep fluency in ACI, AISC, and ASCE standards. Proficient in SAP2000, ETABS, SAFE, IDEA StatiCa, and BIM workflows via Revit and Navisworks. Currently leading digital transformation through BIM deployment, CDE setup, and AI/ML-driven estimation models.",
+  "role": "Senior Structural Designer · BIM & Digital Engineering Lead",
+  "description": "Structural designer across steel, concrete and timber — with deep specialization in heavy industrial structures. 10+ years designing to ACI, AISC and ASCE, with working knowledge of Canadian codes (CSA, NBC). Hands-on in ETABS, SAP2000 and Tekla Structures, with BIM delivery in Revit.",
   "cta": [
-    { "label": "View Projects", "href": "#projects", "class": "btn-primary" },
-    { "label": "Download Résumé ↗", "href": "./assets/Resume.pdf", "class": "btn-ghost", "target": "_blank" }
+    { "label": "Download Résumé ↗", "href": "./assets/Resume.pdf", "class": "btn-primary", "target": "_blank" },
+    { "label": "View Projects", "href": "#projects", "class": "btn-ghost" }
   ],
   "links": [
     { "label": "mahdavi91hamid@gmail.com", "href": "mailto:mahdavi91hamid@gmail.com", "icon": "email" },
