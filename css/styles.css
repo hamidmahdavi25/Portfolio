@@ -65,7 +65,7 @@
      pushing its CONTENT to a single centered column: on screens wider than
      --page-max the content caps at (--page-max - 2*--inset) and centers,
      and every block lines up on the same left/right edge. */
-  --page-max: 1280px;
+  --page-max: 1450px;
   --inset:    clamp(1.4rem, 4vw, 4rem);
   --gutter:   max(var(--inset), calc((100% - var(--page-max)) / 2 + var(--inset)));
 
@@ -393,8 +393,8 @@ h2 {
 /* ── HERO ── */
 #hero {
   display: flex; flex-direction: column;
-  gap: 3.25rem;
-  padding: 6.5rem var(--gutter) 3.5rem;
+  gap: 2.5rem;
+  padding: 5.25rem var(--gutter) 2.5rem;
   position: relative; overflow: hidden;
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 140%);
 }
@@ -419,7 +419,7 @@ h2 {
 .hero-photo-wrap { flex: 0 0 auto; }
 .hero-figure { margin: 0; line-height: 0; }
 .hero-photo {
-  width: clamp(152px, 17.6vw, 240px);
+  width: clamp(132px, 14.5vw, 195px);
   aspect-ratio: 3 / 4; height: auto;
   object-fit: cover; object-position: 50% 18%;
   border-radius: 16px;
@@ -839,7 +839,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .nav-toggle { display: flex; flex-direction: column; justify-content: center; gap: 4px; margin-left: auto; }
   .theme-toggle { margin-left: 0.5rem; }
   section { padding-block: 4rem; }
-  #hero { padding-block: 6.5rem 3rem; gap: 2.5rem; }
+  #hero { padding-block: 5.5rem 2.5rem; gap: 2.25rem; }
   /* Stack headshot above intro text on mobile */
   .hero-top { flex-direction: column-reverse; align-items: flex-start; gap: 1.9rem; }
   .hero-photo { width: clamp(150px, 44vw, 210px); }
