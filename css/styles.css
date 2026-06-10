@@ -374,7 +374,7 @@ section + section { border-top: 1px solid var(--border); }
 #experience { scroll-margin-top: var(--nav-h); }
 /* Unified eyebrow label style for all section headings */
 .label {
-  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700;
+  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 500;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.6rem; display: block;
 }
@@ -492,7 +492,7 @@ h2 {
 } */
 /* Hero tag: same as .label but with flex layout for decorative line */
 .hero-tag {
-  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700;
+  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 500;
   text-transform: uppercase; color: var(--gold);
   margin-bottom: 0.5rem;
   display: flex; align-items: center; gap: 0.8rem;
@@ -511,7 +511,7 @@ h1 {
 .hero-role {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(1.2rem,1.4vw,1.6rem);
-  color: var(--text); font-weight: 400; margin-bottom: 0.9rem;
+  color: var(--text); margin-bottom: 0.9rem;
   font-weight: 700;
 }
 .hero-desc {
@@ -576,7 +576,7 @@ h1 {
   font-size: var(--fs-2xs); letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--tpresent-text); background: var(--gold);
   padding: 0.15rem 0.45rem; border-radius: 3px;
-  font-weight: 600; flex-shrink: 0;
+  font-weight: 500; flex-shrink: 0;
 }
 .tco { font-size: var(--fs-sm); color: var(--gold); margin-bottom: 0.3rem; }
 .tdesc { font-size: var(--fs-body); color: var(--muted); line-height: var(--lh-normal); }
@@ -591,7 +591,7 @@ h1 {
 .skill-block:hover { border-color: var(--card-hover-border); transform: translateY(-3px); box-shadow: 0 12px 30px var(--card-shadow); }
 /* Skill block title: same as .label but with flex layout for divider line */
 .skill-block-title {
-  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 700; text-transform: uppercase;
+  font-size: var(--fs-xs); letter-spacing: 0.25em; font-weight: 500; text-transform: uppercase;
   color: var(--gold); margin-bottom: 1.1rem;
   display: flex; align-items: center; gap: 0.6rem;
 }
@@ -1003,7 +1003,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   transform: translateY(-120%);
   background: var(--gold); color: var(--bg);
   padding: 0.7rem 1.2rem; border-radius: 0 0 8px 0;
-  font-size: var(--fs-base); font-weight: 600; text-decoration: none;
+  font-size: var(--fs-base); font-weight: 500; text-decoration: none;
   transition: transform 0.2s ease;
 }
 .skip-link:focus { transform: translateY(0); outline: 2px solid var(--text); outline-offset: 2px; }
