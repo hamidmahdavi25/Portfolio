@@ -172,6 +172,8 @@ nav::after {
   font-weight: 600;
   white-space: nowrap;
 }
+/* Full label by default; shorten on small phones so it never overflows */
+.logo-role .role-short { display: none; }
 
 /* Nav center links */
 .nav-center {
@@ -830,6 +832,9 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
   h1 { font-size: 2.1rem !important; }
   .hero-role { font-size: 1rem !important; }
   .hero-desc { font-size: 0.88rem; }
+  /* Shorten the logo tag on small phones so it never overflows */
+  .logo-role .role-full { display: none; }
+  .logo-role .role-short { display: inline; }
 }
 /* ── MORE PROJECTS (compact list) ── */
 .mproj-grid {
