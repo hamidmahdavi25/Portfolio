@@ -487,7 +487,7 @@ h1 {
   transform: translateX(-50%);
 }
 .ttitle-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.1rem; }
-.ttitle { font-size: 0.92rem; font-weight: 600; color: var(--text); }
+.ttitle { font-size: 0.92rem; font-weight: 500; color: var(--text); }
 .tpresent {
   font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--tpresent-text); background: var(--gold);
