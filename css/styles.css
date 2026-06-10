@@ -255,14 +255,15 @@ nav::after {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 1rem;
+  padding: 0 1rem;          /* 16px each side → ~32px gap between links */
   color: var(--muted);
   text-decoration: none;
-  /* Match the section titles: Cormorant serif, sentence-case, title weight. */
-  font-family: 'Cormorant Garamond', serif;
-  font-size: var(--fs-lg);
-  letter-spacing: 0.01em;
-  font-weight: 600;
+  /* Sans-serif body font: nav reads as a UI element, distinct from the
+     serif logo and section titles, so it doesn't compete with the H1. */
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
   transition: color .2s;
   white-space: nowrap;
   position: relative;
@@ -844,7 +845,7 @@ footer { text-align: center; padding: 2rem var(--gutter); border-top: 1px solid 
   .nav-links li a {
     display: block; width: 100%; padding: 0.85rem 1.6rem;
     height: auto;
-    font-size: var(--fs-lg); letter-spacing: 0.01em;
+    font-size: 15px; letter-spacing: 0.02em;
     border-bottom: 1px solid var(--border); color: var(--muted);
   }
   .nav-links li:last-child a { border-bottom: none; }
