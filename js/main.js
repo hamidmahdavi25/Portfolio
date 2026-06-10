@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ── ACTIVE SECTION TRACKING ── */
-  const sections   = ['hero', 'education', 'projects', 'skills', 'contact'];
+  const sections   = ['hero', 'experience', 'education', 'projects', 'skills', 'contact'];
   const navAnchors = navLinks.querySelectorAll('a');
 
   function updateActiveLink() {
