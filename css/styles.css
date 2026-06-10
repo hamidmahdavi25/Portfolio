@@ -88,7 +88,7 @@ body {
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   display: flex; align-items: center;
-  height: 62px;
+  height: 64px;
   padding: 0 3rem;
   background: var(--nav-bg);
   backdrop-filter: blur(20px);
@@ -142,38 +142,29 @@ nav::after {
 /* Logo — stacked serif name + spaced caps role */
 .logo {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  line-height: 1;
+  align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  padding-left: 4px;
   padding-right: 1.6rem;
   margin-right: 1.6rem;
   border-right: 1px solid var(--border2);
-  border-radius: 4px;
 }
 .logo:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 4px;
+  border-radius: 4px;
 }
-.logo-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
+.logo-hm {
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-.logo-role {
-  font-size: 0.55rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-size: clamp(20px, 2vw, 22px);
   color: var(--gold);
-  font-weight: 600;
+  letter-spacing: 0.08em;
   white-space: nowrap;
+  transition: filter 0.15s ease;
 }
-/* Full label by default; shorten on small phones so it never overflows */
-.logo-role .role-short { display: none; }
+.logo:hover .logo-hm { filter: brightness(1.35); }
 
 /* Nav center links */
 .nav-center {
@@ -185,7 +176,7 @@ nav::after {
   display: flex;
   list-style: none;
   gap: 0;
-  height: 62px;
+  height: 64px;
   align-items: center;
 }
 .nav-links li { height: 100%; }
@@ -196,8 +187,8 @@ nav::after {
   padding: 0 1rem;
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
+  font-size: clamp(13px, 1.1vw, 14px);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 500;
   transition: color .2s;
@@ -789,8 +780,6 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
   nav { padding: 0 1.2rem; height: 56px; }
   nav::after { left: 1.2rem; right: 1.2rem; }
   .logo { padding-right: 1rem; margin-right: 1rem; }
-  .logo-name { font-size: 1rem; }
-  .logo-role { font-size: 0.5rem; }
   .nav-right { display: none; }
   .nav-center { flex: 1; }
   .nav-links {
@@ -835,9 +824,6 @@ footer { text-align: center; padding: 2rem 5rem; border-top: 1px solid var(--bor
   h1 { font-size: 2.1rem !important; }
   .hero-role { font-size: 1rem !important; }
   .hero-desc { font-size: 0.88rem; }
-  /* Shorten the logo tag on small phones so it never overflows */
-  .logo-role .role-full { display: none; }
-  .logo-role .role-short { display: inline; }
 }
 /* ── MORE PROJECTS (compact list) ── */
 .mproj-grid {
